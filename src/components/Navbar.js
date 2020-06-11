@@ -1,18 +1,10 @@
 import React, {useState} from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
+import { makeStyles, AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import pageContext from '../PaginaContext';
-import Link from '@material-ui/core/Link';
-import { BrowserRouter as Router,  Switch,  Route,  Link as RouterLink } from "react-router-dom";
+import { BrowserRouter as Router} from "react-router-dom";
 import {withRouter} from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
@@ -92,7 +84,7 @@ function Navbar({history}) {
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
         <MenuItem onClick={()=>{handleClose(); setLoguearse()}}>Loguearse</MenuItem>
-        <RouterLink to="/Registrarse"><MenuItem onClick={()=>{handleClose(); setRegistrarse()}}>Registrarse</MenuItem></RouterLink>
+        <MenuItem onClick={()=>{handleClose(); setRegistrarse(); history.push("/Registrarse")}}>Registrarse</MenuItem>
       </Menu>
       </pageContext.Provider>
     </div>
