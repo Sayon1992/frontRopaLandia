@@ -29,20 +29,29 @@ export default function Registrarse() {
         password: '',
         showPassword: false,
         repeatPass: '',
-        showRepeatPass:false
-    });
-
-    const registro = {
+        showRepeatPass:false,
         email: '',
         nombreCompleto: '',
-        password: values.password,
         fechaNacimiento: '',
         direccionCalle: '',
         direccionNumero: '',
         codigoPostal: '',
         documento: '',
         telefonoCelular: '',
-        ciudad: '',
+        ciudad: ''
+    });
+
+    const registro = {
+        email: values.email,
+        nombreCompleto: values.nombreCompleto,
+        password: values.password,
+        fechaNacimiento: values.fechaNacimiento,
+        direccionCalle: values.direccionCalle,
+        direccionNumero: values.direccionNumero,
+        codigoPostal: values.codigoPostal,
+        documento: values.documento,
+        telefonoCelular: values.telefonoCelular,
+        ciudad: values.ciudad
     }
 
     const handleChange = (prop) => (event) => {
@@ -78,17 +87,17 @@ export default function Registrarse() {
                 <Grid container spacing={0}>
                     <Grid item md={11}>
                         <form className={classes.input} noValidate autoComplete="off">
-                            <TextField id="standard-basic" label="Nombre y apellido" fullWidth value={registro.nombreCompleto}/>
+                            <TextField id="standard-basic" label="Nombre y apellido" fullWidth value={registro.nombreCompleto} onChange={handleChange('nombreCompleto')}/>
                         </form>
                     </Grid>
                 </Grid>
                 <Grid container spacing={0}>
                     <Grid item md={3}>
                         <form className={classes.input} noValidate autoComplete="off">
-                            <TextField id="standard-basic" label="Email" fullWidth value={registro.email}/>
+                            <TextField id="standard-basic" label="Email" fullWidth value={registro.email} onChange={handleChange('email')}/>
                         </form>
                     </Grid >
-                    <Grid item md={1} />
+                    <Grid item md={1}/>
                     <Grid item md={3}>
                         <FormControl className={classes.input}>
                             <InputLabel htmlFor="standard-adornment-password">Contraseña</InputLabel>
@@ -138,25 +147,25 @@ export default function Registrarse() {
                 <Grid container spacing={0}>
                     <Grid item md={3}>
                         <form className={classes.input} noValidate autoComplete="off">
-                            <TextField id="standard-basic" label="Direccion" fullWidth value={registro.direccionCalle}/>
+                            <TextField id="standard-basic" label="Direccion" fullWidth value={registro.direccionCalle} onChange={handleChange('direccionCalle')}/>
                         </form>
                     </Grid >
                     <Grid item md={1}/>
                     <Grid item md={1}>
                         <form className={classes.input} noValidate autoComplete="off">
-                            <TextField id="standard-basic" label="Numero" fullWidth value={registro.direccionNumero}/>
+                            <TextField id="standard-basic" label="Numero" fullWidth value={registro.direccionNumero} onChange={handleChange('direccionNumero')}/>
                         </form>
                     </Grid >
                     <Grid item md={1}/>
                     <Grid item md={1}>
                         <form className={classes.input} noValidate autoComplete="off">
-                            <TextField id="standard-basic" label="C.P" fullWidth value={registro.codigoPostal}/>
+                            <TextField id="standard-basic" label="C.P" fullWidth value={registro.codigoPostal} onChange={handleChange('codigoPostal')}/>
                         </form>
                     </Grid >
                     <Grid item md={1}/>
                     <Grid item md={3}>
                         <form className={classes.input} noValidate autoComplete="off">
-                            <TextField id="standard-basic" label="Ciudad" fullWidth value={registro.ciudad}/>
+                            <TextField id="standard-basic" label="Ciudad" fullWidth value={registro.ciudad} onChange={handleChange('ciudad')}/>
                         </form>
                     </Grid >
                 </Grid>
@@ -171,18 +180,19 @@ export default function Registrarse() {
                         }}
                         fullWidth
                         value={registro.fechaNacimiento}
+                        onChange={handleChange('fechaNacimiento')}
                         />
                     </Grid >
                     <Grid item md={1}/>
                     <Grid item md={3}>
                         <form className={classes.input} noValidate autoComplete="off">
-                            <TextField id="standard-basic" label="Documento" fullWidth value={registro.documento}/>
+                            <TextField id="standard-basic" label="Documento" fullWidth value={registro.documento} onChange={handleChange('documento')}/>
                         </form>
                     </Grid >
                     <Grid item md={1}/>
                     <Grid item md={3}>
                         <form className={classes.input} noValidate autoComplete="off">
-                            <TextField id="standard-basic" label="Celular/Telefono" fullWidth value={registro.telefonoCelular}/>
+                            <TextField id="standard-basic" label="Celular/Telefono" fullWidth value={registro.telefonoCelular} onChange={handleChange('telefonoCelular')}/>
                         </form>
                     </Grid >
                 </Grid>
