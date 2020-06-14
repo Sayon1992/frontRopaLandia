@@ -14,7 +14,7 @@ function App() {
         <Navbar />
         <Route exact path="/" component={FilaMuestra}/>
         <Route path="/Registrarse" component={Registrarse}/>
-        <Route path="/Registrarse" component={Loguearse}/>
+        <Route path="/Loguearse" component={Loguearse}/>
       </Router>
     </div>
   );
