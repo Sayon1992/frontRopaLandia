@@ -83,7 +83,7 @@ function Navbar({history}) {
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
-        <MenuItem onClick={()=>{handleClose(); setLoguearse()}}>Loguearse</MenuItem>
+        <MenuItem onClick={()=>{handleClose(); setLoguearse(); history.push("/Loguearse")}}>Loguearse</MenuItem>
         <MenuItem onClick={()=>{handleClose(); setRegistrarse(); history.push("/Registrarse")}}>Registrarse</MenuItem>
       </Menu>
       </pageContext.Provider>

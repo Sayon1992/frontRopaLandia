@@ -16,7 +16,12 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
     boton:{
-        justifyContent: 'center'
+        justifyContent: 'center',
+    },
+    numero:{
+        MozAppearance: "textfield",
+        WebkitAppearance: "none",
+        margin: 0
     }
 }));
 
@@ -24,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Registrarse() {
     const classes = useStyles();
+
+    const [memoRegistro, setMemoRegistro] = useState(false);
 
     const [values, setValues] = useState({
         password: '',
@@ -71,6 +78,11 @@ export default function Registrarse() {
     };
 
     const registarUsuario = () => {
+        if(!memoRegistro){
+            setMemoRegistro(true)
+        }else{
+            setMemoRegistro(false)
+        }
         axios
         .post('dummy', { usuario: registro })
         .then(res => {
@@ -87,14 +99,14 @@ export default function Registrarse() {
                 <Grid container spacing={0}>
                     <Grid item md={11}>
                         <form className={classes.input} noValidate autoComplete="off">
-                            <TextField id="standard-basic" label="Nombre y apellido" fullWidth value={registro.nombreCompleto} onChange={handleChange('nombreCompleto')}/>
+                            <TextField label="Nombre y apellido" fullWidth value={registro.nombreCompleto} onChange={handleChange('nombreCompleto')}/>
                         </form>
                     </Grid>
                 </Grid>
                 <Grid container spacing={0}>
                     <Grid item md={3}>
                         <form className={classes.input} noValidate autoComplete="off">
-                            <TextField id="standard-basic" label="Email" fullWidth value={registro.email} onChange={handleChange('email')}/>
+                            <TextField label="Email" fullWidth value={registro.email} onChange={handleChange('email')}/>
                         </form>
                     </Grid >
                     <Grid item md={1}/>
@@ -147,38 +159,38 @@ export default function Registrarse() {
                 <Grid container spacing={0}>
                     <Grid item md={3}>
                         <form className={classes.input} noValidate autoComplete="off">
-                            <TextField id="standard-basic" label="Direccion" fullWidth value={registro.direccionCalle} onChange={handleChange('direccionCalle')}/>
+                            <TextField label="Direccion" fullWidth value={registro.direccionCalle} onChange={handleChange('direccionCalle')}/>
                         </form>
                     </Grid >
                     <Grid item md={1}/>
                     <Grid item md={1}>
                         <form className={classes.input} noValidate autoComplete="off">
-                            <TextField id="standard-basic" label="Numero" fullWidth value={registro.direccionNumero} onChange={handleChange('direccionNumero')}/>
+                            <TextField label="Numero" fullWidth type="number" value={registro.direccionNumero} onChange={handleChange('direccionNumero')}/>
                         </form>
                     </Grid >
                     <Grid item md={1}/>
                     <Grid item md={1}>
                         <form className={classes.input} noValidate autoComplete="off">
-                            <TextField id="standard-basic" label="C.P" fullWidth value={registro.codigoPostal} onChange={handleChange('codigoPostal')}/>
+                            <TextField label="C.P" type="number" fullWidth value={registro.codigoPostal} onChange={handleChange('codigoPostal')}/>
                         </form>
                     </Grid >
                     <Grid item md={1}/>
                     <Grid item md={3}>
                         <form className={classes.input} noValidate autoComplete="off">
-                            <TextField id="standard-basic" label="Ciudad" fullWidth value={registro.ciudad} onChange={handleChange('ciudad')}/>
+                            <TextField label="Ciudad" fullWidth value={registro.ciudad} onChange={handleChange('ciudad')}/>
                         </form>
                     </Grid >
                 </Grid>
                 <Grid container>
                     <Grid item md={3} className={classes.input}>
                         <TextField
-                        id="date"
                         label="F.Nacimiento"
                         type="date"
                         InputLabelProps={{
                         shrink: true,
                         }}
                         fullWidth
+                        format="DD-MM-AAAA"
                         value={registro.fechaNacimiento}
                         onChange={handleChange('fechaNacimiento')}
                         />
@@ -186,22 +198,22 @@ export default function Registrarse() {
                     <Grid item md={1}/>
                     <Grid item md={3}>
                         <form className={classes.input} noValidate autoComplete="off">
-                            <TextField id="standard-basic" label="Documento" fullWidth value={registro.documento} onChange={handleChange('documento')}/>
+                            <TextField label="Documento" fullWidth type="number" value={registro.documento} onChange={handleChange('documento')}/>
                         </form>
                     </Grid >
                     <Grid item md={1}/>
                     <Grid item md={3}>
                         <form className={classes.input} noValidate autoComplete="off">
-                            <TextField id="standard-basic" label="Celular/Telefono" fullWidth value={registro.telefonoCelular} onChange={handleChange('telefonoCelular')}/>
+                            <TextField type="number" label="Celular/Telefono" fullWidth value={registro.telefonoCelular} onChange={handleChange('telefonoCelular')}/>
                         </form>
                     </Grid >
                 </Grid>
                 <Grid container className={classes.boton}>
                     <Grid item md={3} className={classes.input}>
-                        <Button onClick={registarUsuario()}>
+                        <Button onClick={registarUsuario}>
                             Registrarse
                         </Button>
-                    </Grid >
+                    </Grid>
                 </Grid>
             </Container>
         </div>

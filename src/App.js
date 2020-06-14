@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import { BrowserRouter as Router,  Route} from "react-router-dom";
 import FilaMuestra from './components/FilaMuestra';
 import Registrarse from './components/Registrarse';
+import Loguearse from './components/Loguearse';
 //import ClipLoader from 'react-spinners/ClipLoader';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Navbar />
         <Route exact path="/" component={FilaMuestra}/>
         <Route path="/Registrarse" component={Registrarse}/>
+        <Route path="/Registrarse" component={Loguearse}/>
       </Router>
     </div>
   );
