@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { makeStyles, AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem } from '@material-ui/core';
+import { makeStyles, AppBar, Toolbar, Button, IconButton, Menu, MenuItem } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
@@ -20,13 +20,9 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  shoppingCart: {
-    marginLeft: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-    textAlign: "center",
-  },
+  menu:{
+    marginLeft: 'auto'
+  }
 }));
 
 function Navbar({history}) {
@@ -36,7 +32,7 @@ function Navbar({history}) {
 
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const [page, setPage] = useState()
+  const [page, setPage] = useState();
 
   const handleClick = (event) => {
     setBotonMenu(event.currentTarget);
@@ -65,13 +61,12 @@ function Navbar({history}) {
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            News
-          </Typography>
-          <Button><ShoppingCartIcon className={classes.shoppingCart}></ShoppingCartIcon></Button>
-          <Button color="inherit" onClick={handleClick} aria-controls="simple-menu" aria-haspopup="true">
-            <AccountBoxIcon />
-          </Button>
+          <div className={classes.menu}>
+            <Button><ShoppingCartIcon /></Button>
+            <Button color="inherit" onClick={handleClick} aria-controls="simple-menu" aria-haspopup="true">
+              <AccountBoxIcon />
+            </Button>
+          </div>
         </Toolbar>
       </AppBar>
       <Menu

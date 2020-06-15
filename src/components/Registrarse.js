@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
         MozAppearance: "textfield",
         WebkitAppearance: "none",
         margin: 0
+    },
+    colorBoton:{
+        backgroundColor:""
     }
 }));
 
@@ -132,7 +135,7 @@ export default function Registrarse() {
                             />
                         </FormControl>
                     </Grid>
-                    <Grid item md={1} />
+                    <Grid item md={1}/>
                     <Grid item md={3}>
                         <FormControl className={classes.input}>
                                 <InputLabel htmlFor="standard-adornment-repeat-password">Repite Contraseña</InputLabel>
@@ -210,7 +213,7 @@ export default function Registrarse() {
                 </Grid>
                 <Grid container className={classes.boton}>
                     <Grid item md={3} className={classes.input}>
-                        <Button onClick={registarUsuario}>
+                        <Button className={classes.colorBoton} onClick={registarUsuario} variant="contained" color="primary">
                             Registrarse
                         </Button>
                     </Grid>
