@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import axios from 'axios';
+import {ApiGeneral} from './../API/Api'
 
 function Copyright() {
   return (
@@ -63,14 +63,9 @@ export default function Loguearse() {
   }
 
   const loguearse = () =>{
-    axios
-    .post('dummy', { login: login})
-    .then(res => {
-        console.log(res)
-    })
-    .catch(err => {
-        console.log(err);
-    });
+    ApiGeneral.post('/loguearse',{login}).then((res) => {
+        if(res.data === true) {console.log("usuario logueado")} else {console.log("error al loguear el usuario")}
+    }).catch(e => console.log(`fijate... ${e}`))
   }
 
   const handleChange = (prop) => (event) => {
