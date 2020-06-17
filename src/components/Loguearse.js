@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {ApiGeneral} from './../API/Api'
+import LoginContext from './../context/loginContext'
+
 
 function Copyright() {
   return (
@@ -53,18 +55,22 @@ export default function Loguearse() {
   const classes = useStyles();
 
   const [values, setValues] = useState({
-    usuario: '',
+    email: '',
     password: ''
   })
 
   const login = {
-    usuario: values.usuario,
+    email: values.email,
     password: values.password
   }
 
   const loguearse = () =>{
-    ApiGeneral.post('/loguearse',{login}).then((res) => {
-        if(res.data === true) {console.log("usuario logueado")} else {console.log("error al loguear el usuario")}
+    ApiGeneral.post('loguearse',{login}).then((res) => {
+        if(res.data === true){
+          console.log(res.data)
+        }else {
+          console.log(res.data)
+        }
     }).catch(e => console.log(`fijate... ${e}`))
   }
 
@@ -93,7 +99,7 @@ export default function Loguearse() {
             name="email"
             autoComplete="email"
             autoFocus
-            onChange = {handleChange('usuario')} 
+            onChange = {handleChange('email')} 
           />
           <TextField
             variant="outlined"

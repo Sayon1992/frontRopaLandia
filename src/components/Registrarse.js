@@ -87,7 +87,7 @@ export default function Registrarse() {
             setMemoRegistro(false)
         }
         ApiGeneral.post('Registrarse',{registro}).then((respuesta) => {
-            if(respuesta.data === true) {console.log("Usuario Registrado")} else {console.log("Error al registrar el usuario")}
+            if(respuesta.data === true) {console.log("Usuario Registrado")} else {console.log(respuesta)}
         }).catch(e => {console.log(`fijate... ${e}`)})
     }
     
