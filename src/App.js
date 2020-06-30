@@ -5,6 +5,7 @@ import { BrowserRouter as Router,  Route} from "react-router-dom";
 import FilaMuestra from './components/FilaMuestra';
 import Registrarse from './components/Registrarse';
 import Loguearse from './components/Loguearse';
+import AltaProducto from './components/productos/AltaProducto'
 import { CssBaseline } from '@material-ui/core';
 //import ClipLoader from 'react-spinners/ClipLoader';
 
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/" component={FilaMuestra}/>
         <Route path="/Registrarse" component={Registrarse}/>
         <Route path="/Loguearse" component={Loguearse}/>
+        <Route path="/ProductoTest" component={AltaProducto}/>
       </Router>
     </div>
   );
