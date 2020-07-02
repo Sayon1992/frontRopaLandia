@@ -1,25 +1,39 @@
-import React,{useContext,useState} from 'react';
+import React,{useState,useEffect} from 'react';
 
-const loginContext = React.createContext();
+export const LoginContext = React.createContext();
 
-const LoginContext = (props) => {
-
+export const LoginContextProvider = (props) => {
     const [loginData,setLoginData] = useState({
-        usuario:"",
+        nombreCompleto:"",
         email:"",
-        constraseña:"",
+        password:"",
         loggeado:false,
     })
 
-    function loguearse(loginData) {
-        setLoginData(loginData)
+
+     function loguear({nombreCompleto,email,password}) {
+        const data= {nombreCompleto,email,password,loggeado:true}
+        console.log(data)
+        setLoginData({...data})
+
+        console.log(loginData)
+        localStorage.setItem('usuario', JSON.stringify(loginData))
+
     }
 
+    function desloguear(){
+        setLoginData({nombreCompleto:"",email:"",password:"",loggeado:false})
+    }
+
+    useEffect(() => {
+
+        const localData = localStorage.getItem('usuario')
+        localData? setLoginData(JSON.parse(localData)) : console.log("no hay local data ")
+    },loginData)
     return ( 
-        <loginContext.Provider values={{loginData}}>
+        <LoginContext.Provider value={{loginData,loguear,desloguear}}>
             {props.children}
-        </loginContext.Provider>
+        </LoginContext.Provider>
      );
 }
  
-export default LoginContext;

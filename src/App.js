@@ -7,19 +7,22 @@ import Registrarse from './components/Registrarse';
 import Loguearse from './components/Loguearse';
 import AltaProducto from './components/productos/AltaProducto'
 import { CssBaseline } from '@material-ui/core';
+import {LoginContextProvider} from './context/loginContext'
 //import ClipLoader from 'react-spinners/ClipLoader';
 
 function App() {
   return (
     <div>
       <CssBaseline />
-      <Router>
-        <Navbar />
-        <Route exact path="/" component={FilaMuestra}/>
-        <Route path="/Registrarse" component={Registrarse}/>
-        <Route path="/Loguearse" component={Loguearse}/>
-        <Route path="/ProductoTest" component={AltaProducto}/>
-      </Router>
+      <LoginContextProvider>
+        <Router>
+          <Navbar />
+          <Route exact path="/" component={FilaMuestra}/>
+          <Route path="/Registrarse" component={Registrarse}/>
+          <Route path="/Loguearse" component={Loguearse}/>
+          <Route path="/ProductoTest" component={AltaProducto}/>
+        </Router>
+      </LoginContextProvider>
     </div>
   );
 }

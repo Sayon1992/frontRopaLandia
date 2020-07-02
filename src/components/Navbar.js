@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { makeStyles, AppBar, Toolbar, Button, IconButton, Menu, MenuItem } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import pageContext from '../PaginaContext';
 import { BrowserRouter as Router} from "react-router-dom";
 import {withRouter} from 'react-router';
+import {LoginContext} from './../context/loginContext'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,13 +26,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Navbar({history}) {
+  
+  const {loginData,desloguear} = useContext(LoginContext)
+
+
   const classes = useStyles();
 
   const [botonMenu, setBotonMenu] = React.useState(null);
 
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const [page, setPage] = useState();
 
   const handleClick = (event) => {
     setBotonMenu(event.currentTarget);
@@ -43,19 +46,10 @@ function Navbar({history}) {
     setMenuOpen(false)
   };
 
-  const setRegistrarse = () => {
-    setPage('/Registrarse')
-  };
-
-  const setLoguearse = () => {
-    setPage('/Loguearse')
-  };
-
 
   return (
     <Router>
     <div className={classes.root}>
-      <pageContext.Provider value={{status: page}}>
       <AppBar position="static" className={classes.root}>
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
@@ -69,6 +63,7 @@ function Navbar({history}) {
           </div>
         </Toolbar>
       </AppBar>
+      {loginData.loggeado === false?
       <Menu
         id="simple-menu"
         anchorEl={botonMenu}
@@ -77,11 +72,26 @@ function Navbar({history}) {
         onClose={handleClose}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      >
-        <MenuItem onClick={()=>{handleClose(); setLoguearse(); history.push("/Loguearse")}}>Loguearse</MenuItem>
-        <MenuItem onClick={()=>{handleClose(); setRegistrarse(); history.push("/Registrarse")}}>Registrarse</MenuItem>
+      > 
+        <MenuItem onClick={()=>{handleClose(); history.push("/Loguearse")}}>Loguearse</MenuItem>
+        <MenuItem onClick={()=>{handleClose(); history.push("/Registrarse")}}>Registrarse</MenuItem>
       </Menu>
-      </pageContext.Provider>
+      : 
+
+      <Menu
+        id="simple-menu"
+        anchorEl={botonMenu}
+        keepMounted
+        open={menuOpen}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      > 
+        <MenuItem onClick={()=>{handleClose(); }}>Configuraciones</MenuItem>
+        <MenuItem onClick={()=>{handleClose();desloguear() ;history.push('/loguearse')}}>Salir</MenuItem>
+      </Menu>
+
+    }
     </div>
     </Router>
   );
