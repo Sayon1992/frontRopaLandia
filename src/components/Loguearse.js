@@ -13,7 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {ApiGeneral} from './../API/Api'
-import LoginContext from './../context/loginContext'
+import {LoginContext} from './../context/loginContext'
+import { withRouter } from 'react-router-dom';
 
 
 function Copyright() {
@@ -51,7 +52,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Loguearse() {
+function Loguearse({history}) {
+
+  const {loginData,loguear} = useContext(LoginContext)
+
+
   const classes = useStyles();
 
   const [values, setValues] = useState({
@@ -66,8 +71,9 @@ export default function Loguearse() {
 
   const loguearse = () =>{
     ApiGeneral.post('loguearse',{login}).then((res) => {
-        if(res.data === true){
-          console.log(res.data)
+        if(res.data != null){
+          loguear(res.data)
+          history.push('/')
         }else {
           console.log(res.data)
         }
@@ -145,3 +151,5 @@ export default function Loguearse() {
     </Container>
   );
 }
+
+export default withRouter(Loguearse)

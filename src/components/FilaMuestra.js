@@ -35,8 +35,8 @@ export default function FilaMuestra(){
       };
 
     const [productosMuestra, dispatch] = useReducer(todoListReducer, []);
-
-    useEffect(() => {
+      
+/*    useEffect(() => {
         axios.get('dummy').then(result => {
             const productosData = result.data;
             const productosLlamada = [];
@@ -48,7 +48,7 @@ export default function FilaMuestra(){
         return () => {
 
         }
-    },[])
+    },[]) **/
     return (
         <div className={classes.root}>
             <Container maxWidth="lg">
