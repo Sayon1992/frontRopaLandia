@@ -74,14 +74,14 @@ const AltaProducto = () => {
                 <MenuItem value={2}>Remeras</MenuItem>
                 <MenuItem value={3}>Buzos</MenuItem>
                 <MenuItem value={4}>Sweaters</MenuItem>
-                <MenuItem value={6}>Jeans</MenuItem>
-                <MenuItem value={7}>Ropa Interior</MenuItem>
-                <MenuItem value={8}>Cardigans</MenuItem>
-                <MenuItem value={9}>Chombas</MenuItem>
-                <MenuItem value={10}>Pantalones</MenuItem>
-                <MenuItem value={11}>Joggings</MenuItem>
-                <MenuItem value={12}>Chalecos</MenuItem>
-                <MenuItem value={13}>Trajes de baño</MenuItem>
+                <MenuItem value={5}>Jeans</MenuItem>
+                <MenuItem value={6}>Ropa Interior</MenuItem>
+                <MenuItem value={7}>Cardigans</MenuItem>
+                <MenuItem value={8}>Chombas</MenuItem>
+                <MenuItem value={9}>Pantalones</MenuItem>
+                <MenuItem value={10}>Joggings</MenuItem>
+                <MenuItem value={11}>Chalecos</MenuItem>
+                <MenuItem value={12}>Trajes de baño</MenuItem>
               </Select>
             </FormControl>
         );
@@ -127,7 +127,85 @@ const AltaProducto = () => {
           </FormControl>
         );
       }
-    }   
+    }
+    if(values.tipoGenero === 2){
+      if(values.tipoProducto === 1){
+        return(
+          <FormControl className={classes.inputSelect2}>
+            <InputLabel id="subTipoProducto">Tipo</InputLabel>
+            <Select
+              labelId="subTipoProducto"
+              value={values.subTipoProducto}
+              onChange={handleChange('subTipoProducto')}
+            >
+              <MenuItem value={1}>Blusas</MenuItem>
+              <MenuItem value={2}>Buzos</MenuItem>
+              <MenuItem value={3}>Camisas</MenuItem>
+              <MenuItem value={4}>Camperas</MenuItem>
+              <MenuItem value={5}>Cardigans</MenuItem>
+              <MenuItem value={6}>Jeans</MenuItem>
+              <MenuItem value={7}>Monos</MenuItem>
+              <MenuItem value={8}>Pantalones</MenuItem>
+              <MenuItem value={9}>Remeras</MenuItem>
+              <MenuItem value={10}>Ropa Interior</MenuItem>
+              <MenuItem value={11}>Sweaters</MenuItem>
+              <MenuItem value={12}>Tapados</MenuItem>
+              <MenuItem value={13}>Vestidos</MenuItem>
+            </Select>
+          </FormControl>
+        );
+      }
+      if(values.tipoProducto === 2){
+        return(
+          <FormControl className={classes.inputSelect2}>
+            <InputLabel id="subTipoProducto">Tipo</InputLabel>
+            <Select
+              labelId="subTipoProducto"
+              value={values.subTipoProducto}
+              onChange={handleChange('subTipoProducto')}
+            >
+              <MenuItem value={1}>Botas</MenuItem>
+              <MenuItem value={2}>Borcegos</MenuItem>
+              <MenuItem value={3}>Chatitas</MenuItem>
+              <MenuItem value={4}>Mocasines</MenuItem>
+              <MenuItem value={5}>Ojotas</MenuItem>
+              <MenuItem value={6}>Panchas</MenuItem>
+              <MenuItem value={7}>Sandalias</MenuItem>
+              <MenuItem value={8}>Slides</MenuItem>
+              <MenuItem value={9}>Zapatillas</MenuItem>
+              <MenuItem value={10}>Zapatos</MenuItem>
+              <MenuItem value={11}>Zuecos</MenuItem>
+            </Select>
+          </FormControl>
+        );
+      }
+      if(values.tipoProducto === 3){
+        return(
+          <FormControl className={classes.inputSelect2}>
+            <InputLabel id="subTipoProducto">Tipo</InputLabel>
+            <Select
+              labelId="subTipoProducto"
+              value={values.subTipoProducto}
+              onChange={handleChange('subTipoProducto')}
+            >
+              <MenuItem value={1}>Anteojos</MenuItem>
+              <MenuItem value={2}>Carteras</MenuItem>
+              <MenuItem value={3}>Bolsos</MenuItem>
+              <MenuItem value={4}>Mochilas</MenuItem>
+              <MenuItem value={5}>Relojes</MenuItem>
+              <MenuItem value={6}>Billeteras</MenuItem>
+              <MenuItem value={7}>Cinturones</MenuItem>
+              <MenuItem value={8}>Riñoneras</MenuItem>
+              <MenuItem value={9}>Pashminas</MenuItem>
+              <MenuItem value={10}>Bijou</MenuItem>
+              <MenuItem value={11}>Gorros</MenuItem>
+              <MenuItem value={12}>Sombreros</MenuItem>
+              <MenuItem value={13}>Tapabocas</MenuItem>
+            </Select>
+          </FormControl>
+        );
+      }
+    }
   }
 
   return (
