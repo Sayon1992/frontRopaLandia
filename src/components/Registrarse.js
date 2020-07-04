@@ -33,8 +33,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Registrarse() {
     const classes = useStyles();
 
-    const [memoRegistro, setMemoRegistro] = useState(false);
-
     const [values, setValues] = useState({
         password: '',
         showPassword: false,
@@ -81,11 +79,6 @@ export default function Registrarse() {
     };
 
     const registarUsuario = () => {
-        if(!memoRegistro){
-            setMemoRegistro(true)
-        }else{
-            setMemoRegistro(false)
-        }
         ApiGeneral.post('Registrarse',{registro}).then((respuesta) => {
             if(respuesta.data === true) {console.log("Usuario Registrado")} else {console.log(respuesta)}
         }).catch(e => {console.log(`fijate... ${e}`)})
