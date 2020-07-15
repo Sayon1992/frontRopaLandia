@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Card, Grid, Container, Typography, CardContent, CardActions, Button, TextField, FormControl, MenuItem, InputLabel, Select} from '@material-ui/core';
+import {Card, Grid, Container, Typography, CardContent, CardActions, Button, TextField, FormControl, MenuItem, InputLabel, Select, InputAdornment} from '@material-ui/core';
+import ImageUploader from 'react-images-upload';
+import imageCompression from 'browser-image-compression';
 
 const useStyles = makeStyles((theme) => ({
     introduccion: {
@@ -22,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
     inputSelect2:{
       marginLeft: "2%",
       minWidth: 120,
+    },
+    uploader:{
+      alignItems:"center",
+      alignSelf:"center"
     }
   }));
 
@@ -31,12 +37,52 @@ const AltaProducto = () => {
       tipoProducto: 0,
       nombreProducto: '',
       subTipoProducto: 0,
-      tipoGenero: 0
+      tipoGenero: 0,
+      precioProducto: 0
   });
 
+  const [picture,setPicture] = useState([])
+
+  const [checks,setChecks] = useState({
+    nombreProducto: false,
+    categoriaProducto: false,
+    precioProducto: false,
+    imagenProducto:false
+  })
+
   const handleChange = (prop) => (event) => {
-      setValues({ ...values, [prop]: event.target.value });
+    setValues({ ...values, [prop]: event.target.value });
   };
+
+  const handleCheckNombreProducto = () => {
+    setChecks({ ...checks, nombreProducto: !checks.nombreProducto });
+  };
+  const handleCheckCategoriaProducto = () => {
+    setChecks({ ...checks, categoriaProducto: !checks.categoriaProducto });
+  };
+  const handleCheckPrecioProducto = () => {
+    setChecks({ ...checks, precioProducto: !checks.precioProducto });
+  };
+  const handleCheckImagenProducto = () => {
+    setChecks({ ...checks, imagenProducto: !checks.imagenProducto });
+  };
+
+  async function onDrop (imagen){
+    const imageFile = imagen[0];  
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true
+    }
+    try {
+      const compressedFile = await imageCompression(imageFile, options);
+      console.log('compressedFile instanceof Blob', compressedFile instanceof Blob);
+      console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`);
+      setPicture(picture.concat(compressedFile));
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const classes = useStyles();
 
@@ -49,6 +95,7 @@ const AltaProducto = () => {
               labelId="tipoGenero"
               value={values.tipoGenero}
               onChange={handleChange('tipoGenero')}
+              disabled={checks.categoriaProducto}
             >
               <MenuItem value={1}>Hombre</MenuItem>
               <MenuItem value={2}>Mujer</MenuItem>
@@ -69,6 +116,7 @@ const AltaProducto = () => {
                 labelId="subTipoProducto"
                 value={values.subTipoProducto}
                 onChange={handleChange('subTipoProducto')}
+                disabled={checks.categoriaProducto}
               >
                 <MenuItem value={1}>Camperas</MenuItem>
                 <MenuItem value={2}>Remeras</MenuItem>
@@ -93,6 +141,7 @@ const AltaProducto = () => {
               labelId="subTipoProducto"
               value={values.subTipoProducto}
               onChange={handleChange('subTipoProducto')}
+              disabled={checks.categoriaProducto}
             >
               <MenuItem value={1}>Zapatillas</MenuItem>
               <MenuItem value={2}>Zapatos</MenuItem>
@@ -113,6 +162,7 @@ const AltaProducto = () => {
               labelId="subTipoProducto"
               value={values.subTipoProducto}
               onChange={handleChange('subTipoProducto')}
+              disabled={checks.categoriaProducto}
             >
               <MenuItem value={1}>Mochilas</MenuItem>
               <MenuItem value={2}>Relojes</MenuItem>
@@ -137,6 +187,7 @@ const AltaProducto = () => {
               labelId="subTipoProducto"
               value={values.subTipoProducto}
               onChange={handleChange('subTipoProducto')}
+              disabled={checks.categoriaProducto}
             >
               <MenuItem value={1}>Blusas</MenuItem>
               <MenuItem value={2}>Buzos</MenuItem>
@@ -163,6 +214,7 @@ const AltaProducto = () => {
               labelId="subTipoProducto"
               value={values.subTipoProducto}
               onChange={handleChange('subTipoProducto')}
+              disabled={checks.categoriaProducto}
             >
               <MenuItem value={1}>Botas</MenuItem>
               <MenuItem value={2}>Borcegos</MenuItem>
@@ -187,6 +239,7 @@ const AltaProducto = () => {
               labelId="subTipoProducto"
               value={values.subTipoProducto}
               onChange={handleChange('subTipoProducto')}
+              disabled={checks.categoriaProducto}
             >
               <MenuItem value={1}>Anteojos</MenuItem>
               <MenuItem value={2}>Carteras</MenuItem>
@@ -221,14 +274,16 @@ const AltaProducto = () => {
                 <Typography className={classes.aviso}>
                   Recorda, que el titulo es lo esencial por lo que se va a buscar tu producto, aparte de la categoria y su descripcion
                 </Typography>
-                <TextField fullWidth className={classes.inputTitulo} label="Titulo de producto" onChange={handleChange('nombreProducto')}/>
+                <TextField fullWidth disabled={checks.nombreProducto} className={classes.inputTitulo} label="Titulo de producto" onChange={handleChange('nombreProducto')}/>
               </CardContent>
               <CardActions>
-                <Button size="small">Listo</Button>
+                <Button size="small" disabled={checks.nombreProducto} onClick={handleCheckNombreProducto}>Listo</Button>
+                <Button size="small" disabled={!checks.nombreProducto} onClick={handleCheckNombreProducto}>Atras</Button>
               </CardActions>
             </Card>
           </Grid>
           <Grid item xs={12}>
+            {checks.nombreProducto === true?
             <Card className={classes.introduccion} variant="elevation">
               <CardContent>
                 <Typography className={classes.title} gutterBottom>
@@ -240,6 +295,7 @@ const AltaProducto = () => {
                     labelId="tipoProducto"
                     value={values.tipoProducto}
                     onChange={handleChange('tipoProducto')}
+                    disabled={checks.categoriaProducto}
                   >
                     <MenuItem value={1}>Ropa</MenuItem>
                     <MenuItem value={2}>Calzados</MenuItem>
@@ -250,9 +306,69 @@ const AltaProducto = () => {
                 {condicionalTipoProducto()}
               </CardContent>
               <CardActions>
-                <Button size="small">Listo</Button>
+                <Button size="small" disabled={checks.categoriaProducto} onClick={handleCheckCategoriaProducto}>Listo</Button>
+                <Button size="small" disabled={!checks.categoriaProducto} onClick={handleCheckCategoriaProducto}>Atras</Button>
               </CardActions>
             </Card>
+            :null}
+          </Grid>
+          <Grid item xs={12}>
+          {checks.categoriaProducto === true?
+          <Card className={classes.introduccion} variant="elevation">
+              <CardContent>
+              <Typography className={classes.title} gutterBottom>
+                Sube una imagen de tu producto
+              </Typography>
+              <div className={classes.uploader}>  
+                <ImageUploader
+                withLabel
+                withPreview
+                label="5MB Máximo. jpg o png"
+                withIcon={true}
+                buttonText='Elegir Imagenes'
+                onChange={onDrop}
+                imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                maxFileSize={5242880}
+                fileSizeError="La imagen es demsiado pesada"
+                />
+              </div>
+              </CardContent>
+              <CardActions>
+              <Button size="small" disabled={checks.imagenProducto} onClick={handleCheckImagenProducto}>Listo</Button>
+              <Button size="small" disabled={!checks.imagenProducto} onClick={handleCheckImagenProducto}>Atras</Button>
+              </CardActions>
+            </Card>
+            :null}
+          </Grid>
+          <Grid item xs={12}>
+            {checks.imagenProducto === true?
+            <Card className={classes.introduccion} variant="elevation">
+              <CardContent>
+              <Typography className={classes.title} gutterBottom>
+                Elige un precio para tu producto
+              </Typography>
+              <TextField
+                className={classes.uploader}
+                label="Precio"
+                id="Precio"
+                InputProps={{
+                  startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                }}
+                type='number'
+                variant="outlined"
+                onChange={handleChange('precioProducto')}
+                value={values.precioProducto}
+              />
+              </CardContent>
+              <CardActions>
+              <Button size="small" disabled={checks.imagenProducto} onClick={handleCheckImagenProducto}>Listo</Button>
+              <Button size="small" disabled={!checks.imagenProducto} onClick={handleCheckImagenProducto}>Atras</Button>
+              </CardActions>
+            </Card>
+            :null}
+          </Grid>
+          <Grid item xs={12}>
+            
           </Grid>
         </Grid>
       </Container>

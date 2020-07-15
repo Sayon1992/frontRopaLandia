@@ -1,11 +1,11 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext } from 'react';
 import { makeStyles, AppBar, Toolbar, Button, IconButton, Menu, MenuItem } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import { BrowserRouter as Router} from "react-router-dom";
 import {withRouter} from 'react-router';
-import {LoginContext} from './../context/loginContext'
+import { ContextLogin } from '../context/loginContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,17 +25,19 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Navbar({history}) {
-  
-  const {loginData,desloguear} = useContext(LoginContext)
+const desloguear = () => {
 
+}
+
+function Navbar({history}) {
 
   const classes = useStyles();
 
-  const [botonMenu, setBotonMenu] = React.useState(null);
+  const {logueado, setLogueado} = ContextLogin();
+
+  const [botonMenu, setBotonMenu] = useState(null);
 
   const [menuOpen, setMenuOpen] = useState(false);
-
 
   const handleClick = (event) => {
     setBotonMenu(event.currentTarget);
@@ -45,6 +47,10 @@ function Navbar({history}) {
   const handleClose = () => {
     setMenuOpen(false)
   };
+
+  const desloguear = () => {
+    setLogueado(false)
+  }
 
 
   return (
@@ -63,7 +69,7 @@ function Navbar({history}) {
           </div>
         </Toolbar>
       </AppBar>
-      {loginData.loggeado === false?
+      {logueado === false?
       <Menu
         id="simple-menu"
         anchorEl={botonMenu}
@@ -90,7 +96,6 @@ function Navbar({history}) {
         <MenuItem onClick={()=>{handleClose(); }}>Configuraciones</MenuItem>
         <MenuItem onClick={()=>{handleClose();desloguear() ;history.push('/loguearse')}}>Salir</MenuItem>
       </Menu>
-
     }
     </div>
     </Router>

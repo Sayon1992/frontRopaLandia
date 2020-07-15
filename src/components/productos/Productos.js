@@ -28,32 +28,32 @@ export const Productos = (props) => {
 
     return (
         <Card className={classes.imagen}>
-        <CardActionArea>
-            <CardMedia
-            component="img"
-            alt="Ropa"
-            height="300"
-            image={props.imagen}
-            title="Ropa"
-            className={classes.maximo}
-            />
-            <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-                {props.nombre}
-            </Typography>
-            <Typography variant="h6" className={classes.precio}>
-                {props.precio}
-            </Typography>
-            </CardContent>
-        </CardActionArea>
-        <CardActions className={classes.mostrarMas}>
-            <Button size="small" color="primary">
-                <AddShoppingCartIcon></AddShoppingCartIcon>
-            </Button>
-            <Button size="small" color="primary">
-                <MoreVertIcon></MoreVertIcon>
-            </Button>
-        </CardActions>
+            <CardActionArea>
+                <CardMedia
+                component="img"
+                alt="Ropa"
+                height="300"
+                image={props.imagen}
+                title="Ropa"
+                className={classes.maximo}
+                />
+                <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                    {props.nombre}
+                </Typography>
+                <Typography variant="h6" className={classes.precio}>
+                    {props.precio}
+                </Typography>
+                </CardContent>
+            </CardActionArea>
+            <CardActions className={classes.mostrarMas}>
+                <Button size="small" color="primary">
+                    <AddShoppingCartIcon></AddShoppingCartIcon>
+                </Button>
+                <Button size="small" color="primary">
+                    <MoreVertIcon></MoreVertIcon>
+                </Button>
+            </CardActions>
         </Card>
     );
 }

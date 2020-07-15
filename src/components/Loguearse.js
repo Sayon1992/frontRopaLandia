@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {ApiGeneral} from './../API/Api'
-import {LoginContext} from './../context/loginContext'
+import {ContextLogin} from './../context/loginContext'
 import { withRouter } from 'react-router-dom';
 
 
@@ -54,8 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Loguearse({history}) {
 
-  const {loginData,loguear} = useContext(LoginContext)
-
+  const {setLogueado} = ContextLogin();
 
   const classes = useStyles();
 
@@ -72,12 +71,19 @@ function Loguearse({history}) {
   const loguearse = () =>{
     ApiGeneral.post('loguearse',{login}).then((res) => {
         if(res.data != null){
-          loguear(res.data)
+          console.log(res);
+          setLogueado(true);
           history.push('/')
         }else {
           console.log(res.data)
         }
     }).catch(e => console.log(`fijate... ${e}`))
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    await loguearse();
+    alert('logueado')
   }
 
   const handleChange = (prop) => (event) => {
@@ -94,7 +100,7 @@ function Loguearse({history}) {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -105,6 +111,7 @@ function Loguearse({history}) {
             name="email"
             autoComplete="email"
             autoFocus
+            value={values.email}
             onChange = {handleChange('email')} 
           />
           <TextField
@@ -116,6 +123,7 @@ function Loguearse({history}) {
             label="Password"
             type="password"
             id="password"
+            value={values.password}
             autoComplete="current-password"
             onChange={handleChange('password')}
           />
@@ -127,7 +135,7 @@ function Loguearse({history}) {
             fullWidth
             variant="contained"
             className={classes.submit}
-            onClick={loguearse}
+            type="submit"
           >
             Sign In
           </Button>
