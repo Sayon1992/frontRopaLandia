@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
-import { BrowserRouter as Router,  Route} from "react-router-dom";
-import FilaMuestra from './components/FilaMuestra';
+import {Route} from "react-router-dom";
+import PaginaPrincipal from './components/PaginaPrincipal';
 import Registrarse from './components/Registrarse';
 import Loguearse from './components/Loguearse';
 import AltaProducto from './components/productos/AltaProducto'
@@ -13,12 +13,22 @@ import { LoginContext } from "./context/loginContext";
 function App() {
   const [logueado, setLogueado] = useState(false)
 
+  useEffect(() => {
+    var saveData = JSON.parse(localStorage.saveData || null) || {};
+    if(saveData.obj !== null && saveData.obj !== "" && saveData.obj !== undefined && saveData.obj !== {}){
+      setLogueado(true);
+    }else{
+      setLogueado(false);
+    }
+    return () => {}
+  }, [logueado])
+
   return (
     <div>
       <LoginContext.Provider value={{logueado, setLogueado}}>
       <CssBaseline />
           <Navbar />
-          <Route exact path="/" component={FilaMuestra}/>
+          <Route exact path="/" component={PaginaPrincipal}/>
           <Route path="/Registrarse" component={Registrarse}/>
           <Route path="/Loguearse" component={Loguearse}/>
           <Route path="/ProductoTest" component={AltaProducto}/>

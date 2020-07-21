@@ -25,10 +25,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const desloguear = () => {
-
-}
-
 function Navbar({history}) {
 
   const classes = useStyles();
@@ -39,7 +35,8 @@ function Navbar({history}) {
 
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleClick = (event) => {
+  function handleClick(event){
+    console.log(event)
     setBotonMenu(event.currentTarget);
     setMenuOpen(true)
   };
@@ -47,9 +44,10 @@ function Navbar({history}) {
   const handleClose = () => {
     setMenuOpen(false)
   };
-
+  
   const desloguear = () => {
     setLogueado(false)
+    window.localStorage.clear();
   }
 
 

@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import {Card, Grid, Container, Typography, CardContent, CardActions, Button, TextField, FormControl, MenuItem, InputLabel, Select, InputAdornment} from '@material-ui/core';
 import ImageUploader from 'react-images-upload';
 import imageCompression from 'browser-image-compression';
+import {ApiGeneral} from '../../API/Api';
+import { withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     introduccion: {
@@ -31,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-const AltaProducto = () => {
+const AltaProducto = ({history}) => {
   
   const [values, setValues] = useState({
       tipoProducto: 0,
@@ -83,6 +85,17 @@ const AltaProducto = () => {
       console.log(error);
     }
   }
+
+  const subirProducto = () => {
+    ApiGeneral.post('altaProducto',{values, picture}).then((res) => {
+        if(res.data != null && res.data != ""){
+          history.push('/')
+        }else {
+          console.log(res.data)
+        }
+    }).catch(e => console.log(`fijate... ${e}`))
+  }
+  
 
   const classes = useStyles();
 
@@ -361,14 +374,22 @@ const AltaProducto = () => {
               />
               </CardContent>
               <CardActions>
-              <Button size="small" disabled={checks.imagenProducto} onClick={handleCheckImagenProducto}>Listo</Button>
-              <Button size="small" disabled={!checks.imagenProducto} onClick={handleCheckImagenProducto}>Atras</Button>
+              <Button size="small" disabled={checks.precioProducto} onClick={handleCheckPrecioProducto}>Listo</Button>
+              <Button size="small" disabled={!checks.precioProducto} onClick={handleCheckPrecioProducto}>Atras</Button>
               </CardActions>
             </Card>
             :null}
           </Grid>
           <Grid item xs={12}>
-            
+            {checks.imagenProducto === true ?
+            <Card className={classes.introduccion} variant="elevation">
+              <CardContent>
+                <Button size="medium" onClick={subirProducto}>
+                  Subir Producto
+                </Button>
+              </CardContent>
+            </Card>
+            :null}
           </Grid>
         </Grid>
       </Container>
@@ -377,4 +398,4 @@ const AltaProducto = () => {
      );
 }
  
-export default AltaProducto;
+export default withRouter(AltaProducto);

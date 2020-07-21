@@ -5,6 +5,8 @@ import  logo from "./../imagenes/pantalon.jpg";
 import { Productos } from './productos/Productos';
 import Carousel from 'react-material-ui-carousel';
 import axios from 'axios';
+import CompDrawer from './productos/CompDrawer';
+import { withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles((theme)=>({
     root: {
@@ -22,7 +24,7 @@ const useStyles = makeStyles((theme)=>({
     }
 }))
 
-export default function FilaMuestra(){
+function PaginaPrincipal({history}){
     const classes = useStyles();
 
     const todoListReducer = (state, action) => {
@@ -51,9 +53,10 @@ export default function FilaMuestra(){
     },[]) **/
     return (
         <div className={classes.root}>
+            <CompDrawer />
             <Container maxWidth="lg">
                 <Typography className={classes.title}>
-                    Heading
+                    
                 </Typography>
                 <Carousel
                 indicators="false"
@@ -62,7 +65,7 @@ export default function FilaMuestra(){
                     <Grid container spacing={10}>
                         {productosMuestra.map(producto =>(
                             <Grid item md={3}  spacing={5}>
-                                <Productos imagen={logo} precio={producto.precio} nombre={producto.nombre}></Productos>
+                                <Productos imagen={logo} precio={producto.precio} nombre={producto.nombre} onClick={history.push('/InfoProducto')}></Productos>
                             </Grid>
                         ))}
                     </Grid>
@@ -71,3 +74,5 @@ export default function FilaMuestra(){
         </div>
     )
 }
+
+export default withRouter(PaginaPrincipal);

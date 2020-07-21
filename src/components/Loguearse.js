@@ -54,6 +54,8 @@ const useStyles = makeStyles((theme) => ({
 
 function Loguearse({history}) {
 
+  let saveData = JSON.parse(localStorage.saveData || null) || {};
+
   const {setLogueado} = ContextLogin();
 
   const classes = useStyles();
@@ -70,8 +72,10 @@ function Loguearse({history}) {
 
   const loguearse = () =>{
     ApiGeneral.post('loguearse',{login}).then((res) => {
-        if(res.data != null){
-          console.log(res);
+        if(res.data != null && res.data != ""){
+          saveData.obj = res.data;
+          saveData.time = new Date().getTime();
+          localStorage.saveData = JSON.stringify(saveData);
           setLogueado(true);
           history.push('/')
         }else {
