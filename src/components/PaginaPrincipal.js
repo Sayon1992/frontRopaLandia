@@ -39,7 +39,85 @@ const useStyles = makeStyles((theme)=>({
 function PaginaPrincipal({history}){
     const classes = useStyles();
     
-    const tiendas = [tienda1,tienda2,tienda1,tienda2];
+    const tiendas = [{
+        "nombre": "Tienda 1",
+        "localidad":"Flores",
+        "ubicacion":"-34.6242747, -58.4736457",
+        "categoria":"Mujer",
+        "imagenes":[
+            {
+                "imagen":"https://laurachaparroperiodista.files.wordpress.com/2018/10/stsci-h-p1737c-z-1000x1000.png?w=800",
+                "precio":1250
+            },
+            {
+                "imagen":"https://upload.wikimedia.org/wikipedia/commons/4/47/VU-Banana-1000x1000.png",
+                "precio":860
+            },
+            {
+                "imagen":"https://i.redd.it/dr81ny8ubbky.jpg",
+                "precio":1000
+            }
+        ]
+        },{
+            "nombre": "Tienda 2",
+            "localidad":"Flores",
+            "ubicacion":"-37.6242747, -59.4736457",
+            "categoria":"Mujer",
+            "imagenes":[
+                {
+                    "imagen":"https://laurachaparroperiodista.files.wordpress.com/2018/10/stsci-h-p1737c-z-1000x1000.png?w=800",
+                    "precio":1250
+                },
+                {
+                    "imagen":"https://upload.wikimedia.org/wikipedia/commons/4/47/VU-Banana-1000x1000.png",
+                    "precio":860
+                },
+                {
+                    "imagen":"https://i.redd.it/dr81ny8ubbky.jpg",
+                    "precio":1000
+                }
+            ]
+        },{
+            "nombre": "Tienda 3",
+            "localidad":"Flores",
+            "ubicacion":"-35.6242747, -54.4736457",
+            "categoria":"Mujer",
+            "imagenes":[
+                {
+                    "imagen":"https://laurachaparroperiodista.files.wordpress.com/2018/10/stsci-h-p1737c-z-1000x1000.png?w=800",
+                    "precio":1250
+                },
+                {
+                    "imagen":"https://upload.wikimedia.org/wikipedia/commons/4/47/VU-Banana-1000x1000.png",
+                    "precio":860
+                },
+                {
+                    "imagen":"https://i.redd.it/dr81ny8ubbky.jpg",
+                    "precio":1000
+                }
+            ]
+        },{
+            "nombre": "Tienda 4",
+            "localidad":"Flores",
+            "ubicacion":"-32.6242747, -58.4736457",
+            "categoria":"Mujer",
+            "imagenes":[
+                {
+                    "imagen":"https://laurachaparroperiodista.files.wordpress.com/2018/10/stsci-h-p1737c-z-1000x1000.png?w=800",
+                    "precio":1250
+                },
+                {
+                    "imagen":"https://upload.wikimedia.org/wikipedia/commons/4/47/VU-Banana-1000x1000.png",
+                    "precio":860
+                },
+                {
+                    "imagen":"https://i.redd.it/dr81ny8ubbky.jpg",
+                    "precio":1000
+                }
+            ]
+        }];
+
+
 
     // useEffect(()=>{
     //     axios.get('dummy').then(result =>{
@@ -110,27 +188,20 @@ function PaginaPrincipal({history}){
                 </Carousel>
             </Grid>
             <Grid container>
-                <Grid item md={6} className={classes.tienda}>
-                    <Carousel
-                    indicators="false"
-                    animation="fade"
-                    autoPlay="false"
-                    className={classes.carousel}
-                    >
-                        <Tiendas imagen={tiendas}/>
-                    </Carousel>
-                </Grid>
-                <Grid item md={6} className={classes.tienda}>
-                    <Carousel
-                    indicators="false"
-                    animation="fade"
-                    autoPlay="false"
-                    className={classes.carousel}
-                    >
-                        <Tiendas imagen={tiendas}/>
-                        <Tiendas imagen={tiendas}/>
-                    </Carousel>
-                </Grid>
+                {tiendas.map((tienda)=>(
+                    <Grid item md={6} className={classes.tienda}>
+                        <Carousel
+                        indicators="false"
+                        animation="fade"
+                        autoPlay="false"
+                        className={classes.carousel}
+                        >
+                            {tienda.imagenes.map((imagen)=>(
+                                <Tiendas imagen={imagen} />
+                            ))}
+                        </Carousel>
+                    </Grid>
+                ))}
             </Grid>
             </Container>
         </div>

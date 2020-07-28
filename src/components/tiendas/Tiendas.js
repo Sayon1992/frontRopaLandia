@@ -18,7 +18,7 @@ const Tiendas = (props) => {
         <div>
             <Card className={classes.fotoTienda}>
                 <CardActionArea>
-                    <CardMedia image={props.imagen[0]} className={classes.fotoTienda}/>
+                    <CardMedia image={props.imagen.imagen} className={classes.fotoTienda}/>
                 </CardActionArea>
             </Card>
         </div>
