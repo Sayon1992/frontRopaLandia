@@ -88,7 +88,7 @@ const AltaProducto = ({history}) => {
 
   const subirProducto = () => {
     ApiGeneral.post('altaProducto',{values, picture}).then((res) => {
-        if(res.data != null && res.data != ""){
+        if(res.data !== null && res.data !== ""){
           history.push('/')
         }else {
           console.log(res.data)

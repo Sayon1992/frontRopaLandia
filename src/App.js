@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
-import Navbar from './components/Navbar';
 import {Route} from "react-router-dom";
 import PaginaPrincipal from './components/PaginaPrincipal';
-import Registrarse from './components/Registrarse';
-import Loguearse from './components/Loguearse';
+import Registrarse from './components/login/Registrarse';
+import Loguearse from './components/login/Loguearse';
 import AltaProducto from './components/productos/AltaProducto'
 import { CssBaseline } from '@material-ui/core';
 import { LoginContext } from "./context/loginContext";
@@ -27,7 +26,6 @@ function App() {
     <div>
       <LoginContext.Provider value={{logueado, setLogueado}}>
       <CssBaseline />
-          <Navbar />
           <Route exact path="/" component={PaginaPrincipal}/>
           <Route path="/Registrarse" component={Registrarse}/>
           <Route path="/Loguearse" component={Loguearse}/>

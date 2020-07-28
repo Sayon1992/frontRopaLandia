@@ -15,7 +15,8 @@ const useStyles = makeStyles((theme) => ({
         fontWeight:20,
     },
     imagen: {
-        maxWidth:250
+        maxWidth:250,
+        backgroundColor:'#fbf4f9'
     },
     mostrarMas: {
         display: "flex",
@@ -47,10 +48,10 @@ export const Productos = (props) => {
                 </CardContent>
             </CardActionArea>
             <CardActions className={classes.mostrarMas}>
-                <Button size="small" color="primary">
+                <Button size="small" style={{color:'black'}}>
                     <AddShoppingCartIcon></AddShoppingCartIcon>
                 </Button>
-                <Button size="small" color="primary">
+                <Button size="small" style={{color:'black'}}>
                     <MoreVertIcon></MoreVertIcon>
                 </Button>
             </CardActions>

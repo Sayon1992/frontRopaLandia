@@ -1,12 +1,16 @@
-import React, {useEffect, useReducer} from 'react';
+import React, { useEffect } from 'react';
 import Grid from "@material-ui/core/Grid";
-import { makeStyles, Container, Typography } from '@material-ui/core';
+import { makeStyles, Container } from '@material-ui/core';
 import  logo from "./../imagenes/pantalon.jpg";
 import { Productos } from './productos/Productos';
 import Carousel from 'react-material-ui-carousel';
-import axios from 'axios';
-import CompDrawer from './productos/CompDrawer';
+//import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import Navbar from './Navbars/Navbar';
+import Navbar2 from './Navbars/Navbar2';
+import Tiendas from './tiendas/Tiendas';
+import tienda1 from '../imagenes/imagentienda/fotoTienda1.jpg'
+import tienda2 from '../imagenes/imagentienda/fotoTienda2.jpg'
 
 const useStyles = makeStyles((theme)=>({
     root: {
@@ -21,23 +25,30 @@ const useStyles = makeStyles((theme)=>({
     image:{
         maxWidth:"50px",
         maxHeight:"250px",
+    },
+    carousel:{
+        marginTop:'10em'
+    },
+    tienda:{
+        alignItems:'center',
+        display:'flex',
+        justifyContent:'center'
     }
 }))
 
 function PaginaPrincipal({history}){
     const classes = useStyles();
+    
+    const tiendas = [tienda1,tienda2,tienda1,tienda2];
 
-    const todoListReducer = (state, action) => {
-        switch (action.type) {
-          case 'SET':
-            return action.payload;
-          default:
-            return state;
-        }
-      };
-
-    const [productosMuestra, dispatch] = useReducer(todoListReducer, []);
-      
+    // useEffect(()=>{
+    //     axios.get('dummy').then(result =>{
+    //         const tiendasData = result.data;
+    //         forEach(tienda in tiendaData){
+    //             tiendas.push(tienda)
+    //         }
+    //     })
+    // },[])
 /*    useEffect(() => {
         axios.get('dummy').then(result => {
             const productosData = result.data;
@@ -53,23 +64,69 @@ function PaginaPrincipal({history}){
     },[]) **/
     return (
         <div className={classes.root}>
-            <CompDrawer />
+            <Navbar />
+            <Navbar2 />
             <Container maxWidth="lg">
-                <Typography className={classes.title}>
-                    
-                </Typography>
+            <Grid container>
                 <Carousel
                 indicators="false"
                 animation="fade"
-                autoPlay="false">
-                    <Grid container spacing={10}>
-                        {productosMuestra.map(producto =>(
+                autoPlay="false"
+                className={classes.carousel}>
+                        {/* {productosMuestra.map(producto =>(
                             <Grid item md={3}  spacing={5}>
                                 <Productos imagen={logo} precio={producto.precio} nombre={producto.nombre} onClick={history.push('/InfoProducto')}></Productos>
                             </Grid>
-                        ))}
+                        ))} */}
+                        
+                    <Grid container spacing={10}>
+                        <Grid item md={3} spacing={5}>
+                            <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
+                        </Grid>
+                        <Grid item md={3} spacing={5}>
+                            <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
+                        </Grid>
+                        <Grid item md={3} spacing={5}>
+                            <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
+                        </Grid>
+                        <Grid item md={3} spacing={5}>
+                            <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
+                        </Grid>
+                    </Grid>
+                    <Grid container spacing={10}>
+                        <Grid item md={3} spacing={5}>
+                            <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
+                        </Grid>
+                        <Grid item md={3} spacing={5}>
+                            <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
+                        </Grid>
+                        <Grid item md={3} spacing={5}>
+                            <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
+                        </Grid>
+                        <Grid item md={3} spacing={5}>
+                            <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
+                        </Grid>
                     </Grid>
                 </Carousel>
+            </Grid>
+            <Grid container>
+                <Carousel
+                indicators="false"
+                animation="fade"
+                autoPlay="false"
+                className={classes.carousel}
+                >
+                    
+                    <Grid item md={6} className={classes.tienda}>
+                        <Tiendas imagen={tiendas}/>
+                    </Grid>
+                </Carousel>
+                <Carousel>
+                    <Grid item md={6} className={classes.tienda}>
+                        <Tiendas imagen={tiendas}/>
+                    </Grid>
+                </Carousel>
+            </Grid>
             </Container>
         </div>
     )

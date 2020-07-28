@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Grid, Container, makeStyles, TextField, FormControl, InputLabel, Input, InputAdornment, IconButton, Button } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-import {ApiGeneral} from './../API/Api'
+import {ApiGeneral} from '../../API/Api'
 
 const useStyles = makeStyles((theme) => ({
     input:{

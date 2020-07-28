@@ -1,4 +1,4 @@
-import React, {useState,useContext} from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,8 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {ApiGeneral} from './../API/Api'
-import {ContextLogin} from './../context/loginContext'
+import {ApiGeneral} from '../../API/Api'
+import {ContextLogin} from '../../context/loginContext'
 import { withRouter } from 'react-router-dom';
 
 
@@ -72,7 +72,7 @@ function Loguearse({history}) {
 
   const loguearse = () =>{
     ApiGeneral.post('loguearse',{login}).then((res) => {
-        if(res.data != null && res.data != ""){
+        if(res.data !== null && res.data !== ""){
           saveData.obj = res.data;
           saveData.time = new Date().getTime();
           localStorage.saveData = JSON.stringify(saveData);
