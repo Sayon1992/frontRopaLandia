@@ -110,22 +110,27 @@ function PaginaPrincipal({history}){
                 </Carousel>
             </Grid>
             <Grid container>
-                <Carousel
-                indicators="false"
-                animation="fade"
-                autoPlay="false"
-                className={classes.carousel}
-                >
-                    
-                    <Grid item md={6} className={classes.tienda}>
+                <Grid item md={6} className={classes.tienda}>
+                    <Carousel
+                    indicators="false"
+                    animation="fade"
+                    autoPlay="false"
+                    className={classes.carousel}
+                    >
                         <Tiendas imagen={tiendas}/>
-                    </Grid>
-                </Carousel>
-                <Carousel>
-                    <Grid item md={6} className={classes.tienda}>
+                    </Carousel>
+                </Grid>
+                <Grid item md={6} className={classes.tienda}>
+                    <Carousel
+                    indicators="false"
+                    animation="fade"
+                    autoPlay="false"
+                    className={classes.carousel}
+                    >
                         <Tiendas imagen={tiendas}/>
-                    </Grid>
-                </Carousel>
+                        <Tiendas imagen={tiendas}/>
+                    </Carousel>
+                </Grid>
             </Grid>
             </Container>
         </div>
