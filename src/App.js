@@ -7,6 +7,7 @@ import Loguearse from './components/login/Loguearse';
 import AltaProducto from './components/productos/AltaProducto'
 import { CssBaseline } from '@material-ui/core';
 import { LoginContext } from "./context/loginContext";
+import VerTienda from './components/tiendas/VerTienda';  
 //import ClipLoader from 'react-spinners/ClipLoader';
 
 function App() {
@@ -27,9 +28,10 @@ function App() {
       <LoginContext.Provider value={{logueado, setLogueado}}>
       <CssBaseline />
           <Route exact path="/" component={PaginaPrincipal}/>
-          <Route path="/Registrarse" component={Registrarse}/>
-          <Route path="/Loguearse" component={Loguearse}/>
-          <Route path="/ProductoTest" component={AltaProducto}/>
+          <Route exact path="/Registrarse" component={Registrarse}/>
+          <Route exact path="/Loguearse" component={Loguearse}/>
+          <Route exact path="/ProductoTest" component={AltaProducto}/>
+          <Route path="/VerTienda" component={VerTienda}/>
       </LoginContext.Provider>
     </div>
   );

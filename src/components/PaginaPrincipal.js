@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, Container } from '@material-ui/core';
 import  logo from "./../imagenes/pantalon.jpg";
@@ -9,8 +9,6 @@ import { withRouter } from 'react-router-dom';
 import Navbar from './Navbars/Navbar';
 import Navbar2 from './Navbars/Navbar2';
 import Tiendas from './tiendas/Tiendas';
-import tienda1 from '../imagenes/imagentienda/fotoTienda1.jpg'
-import tienda2 from '../imagenes/imagentienda/fotoTienda2.jpg'
 
 const useStyles = makeStyles((theme)=>({
     root: {
@@ -40,6 +38,7 @@ function PaginaPrincipal({history}){
     const classes = useStyles();
     
     const tiendas = [{
+        "id":'asd',
         "nombre": "Tienda 1",
         "localidad":"Flores",
         "ubicacion":"-34.6242747, -58.4736457",
@@ -59,6 +58,7 @@ function PaginaPrincipal({history}){
             }
         ]
         },{
+            "id":'qwe',
             "nombre": "Tienda 2",
             "localidad":"Flores",
             "ubicacion":"-37.6242747, -59.4736457",
@@ -78,6 +78,7 @@ function PaginaPrincipal({history}){
                 }
             ]
         },{
+            "id":'zxc',
             "nombre": "Tienda 3",
             "localidad":"Flores",
             "ubicacion":"-35.6242747, -54.4736457",
@@ -97,6 +98,7 @@ function PaginaPrincipal({history}){
                 }
             ]
         },{
+            "id":'jkl',
             "nombre": "Tienda 4",
             "localidad":"Flores",
             "ubicacion":"-32.6242747, -58.4736457",
@@ -116,9 +118,7 @@ function PaginaPrincipal({history}){
                 }
             ]
         }];
-
-
-
+        
     // useEffect(()=>{
     //     axios.get('dummy').then(result =>{
     //         const tiendasData = result.data;
@@ -156,32 +156,31 @@ function PaginaPrincipal({history}){
                                 <Productos imagen={logo} precio={producto.precio} nombre={producto.nombre} onClick={history.push('/InfoProducto')}></Productos>
                             </Grid>
                         ))} */}
-                        
                     <Grid container spacing={10}>
-                        <Grid item md={3} spacing={5}>
+                        <Grid item md={3} >
                             <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
                         </Grid>
-                        <Grid item md={3} spacing={5}>
+                        <Grid item md={3} >
                             <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
                         </Grid>
-                        <Grid item md={3} spacing={5}>
+                        <Grid item md={3} >
                             <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
                         </Grid>
-                        <Grid item md={3} spacing={5}>
+                        <Grid item md={3} >
                             <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
                         </Grid>
                     </Grid>
                     <Grid container spacing={10}>
-                        <Grid item md={3} spacing={5}>
+                        <Grid item md={3} >
                             <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
                         </Grid>
-                        <Grid item md={3} spacing={5}>
+                        <Grid item md={3}>
                             <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
                         </Grid>
-                        <Grid item md={3} spacing={5}>
+                        <Grid item md={3} >
                             <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
                         </Grid>
-                        <Grid item md={3} spacing={5}>
+                        <Grid item md={3} >
                             <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
                         </Grid>
                     </Grid>
@@ -189,7 +188,7 @@ function PaginaPrincipal({history}){
             </Grid>
             <Grid container>
                 {tiendas.map((tienda)=>(
-                    <Grid item md={6} className={classes.tienda}>
+                    <Grid item md={6} className={classes.tienda} key={tienda.id}>
                         <Carousel
                         indicators="false"
                         animation="fade"
@@ -197,7 +196,7 @@ function PaginaPrincipal({history}){
                         className={classes.carousel}
                         >
                             {tienda.imagenes.map((imagen)=>(
-                                <Tiendas imagen={imagen} />
+                                <Tiendas imagen={imagen} tienda={tienda} key={tienda.id}/>
                             ))}
                         </Carousel>
                     </Grid>

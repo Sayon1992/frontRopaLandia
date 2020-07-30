@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Button, Menu, MenuItem, Tooltip, InputBase, useScrollTrigger, Box } from '@material-ui/core';
+import { AppBar, Toolbar, Button, Menu, MenuItem, Tooltip, InputBase, useScrollTrigger } from '@material-ui/core';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SearchIcon from '@material-ui/icons/Search'
