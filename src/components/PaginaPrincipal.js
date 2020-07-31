@@ -6,8 +6,6 @@ import { Productos } from './productos/Productos';
 import Carousel from 'react-material-ui-carousel';
 //import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import Navbar from './Navbars/Navbar';
-import Navbar2 from './Navbars/Navbar2';
 import Tiendas from './tiendas/Tiendas';
 
 const useStyles = makeStyles((theme)=>({
@@ -142,50 +140,48 @@ function PaginaPrincipal({history}){
     },[]) **/
     return (
         <div className={classes.root}>
-            <Navbar />
-            <Navbar2 />
+            {/* <Navbar />
+            <Navbar2 /> */}
             <Container maxWidth="lg">
-            <Grid container>
-                <Carousel
-                indicators="false"
-                animation="fade"
-                autoPlay="false"
-                className={classes.carousel}>
-                        {/* {productosMuestra.map(producto =>(
-                            <Grid item md={3}  spacing={5}>
-                                <Productos imagen={logo} precio={producto.precio} nombre={producto.nombre} onClick={history.push('/InfoProducto')}></Productos>
-                            </Grid>
-                        ))} */}
-                    <Grid container spacing={10}>
-                        <Grid item md={3} >
-                            <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
+            <Carousel
+            indicators="false"
+            animation="fade"
+            autoPlay="false"
+            className={classes.carousel}>
+                    {/* {productosMuestra.map(producto =>(
+                        <Grid item md={3}  spacing={5}>
+                            <Productos imagen={logo} precio={producto.precio} nombre={producto.nombre} onClick={history.push('/InfoProducto')}></Productos>
                         </Grid>
-                        <Grid item md={3} >
-                            <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
-                        </Grid>
-                        <Grid item md={3} >
-                            <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
-                        </Grid>
-                        <Grid item md={3} >
-                            <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
-                        </Grid>
+                    ))} */}
+                <Grid container spacing={10}>
+                    <Grid item md={3} >
+                        <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
                     </Grid>
-                    <Grid container spacing={10}>
-                        <Grid item md={3} >
-                            <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
-                        </Grid>
-                        <Grid item md={3}>
-                            <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
-                        </Grid>
-                        <Grid item md={3} >
-                            <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
-                        </Grid>
-                        <Grid item md={3} >
-                            <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
-                        </Grid>
+                    <Grid item md={3} >
+                        <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
                     </Grid>
-                </Carousel>
-            </Grid>
+                    <Grid item md={3} >
+                        <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
+                    </Grid>
+                    <Grid item md={3} >
+                        <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
+                    </Grid>
+                </Grid>
+                <Grid container spacing={10}>
+                    <Grid item md={3} >
+                        <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
+                    </Grid>
+                    <Grid item md={3}>
+                        <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
+                    </Grid>
+                    <Grid item md={3} >
+                        <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
+                    </Grid>
+                    <Grid item md={3} >
+                        <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
+                    </Grid>
+                </Grid>
+            </Carousel>
             <Grid container>
                 {tiendas.map((tienda)=>(
                     <Grid item md={6} className={classes.tienda} key={tienda.id}>

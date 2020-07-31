@@ -7,7 +7,9 @@ import Loguearse from './components/login/Loguearse';
 import AltaProducto from './components/productos/AltaProducto'
 import { CssBaseline } from '@material-ui/core';
 import { LoginContext } from "./context/loginContext";
-import VerTienda from './components/tiendas/VerTienda';  
+import VerTienda from './components/tiendas/VerTienda';
+import Navbar from './components/Navbars/Navbar'
+import Navbar2 from './components/Navbars/Navbar2'  
 //import ClipLoader from 'react-spinners/ClipLoader';
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
   return (
     <div>
       <LoginContext.Provider value={{logueado, setLogueado}}>
+      <Navbar />
+      <Navbar2 />
       <CssBaseline />
           <Route exact path="/" component={PaginaPrincipal}/>
           <Route exact path="/Registrarse" component={Registrarse}/>
