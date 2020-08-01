@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex'
       },
       marginTop:60,
-      zIndex:-10
+      zIndex:0
   },
   buttonColor:{
       color: "#ebebeb"
