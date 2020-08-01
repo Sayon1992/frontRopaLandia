@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) =>({
     [theme.breakpoints.up('sm')]: {
       width: 'auto',
     },
-    zIndex: -1
+    zIndex: 0
   },
   searchIcon: {
     padding: theme.spacing(0, 2),

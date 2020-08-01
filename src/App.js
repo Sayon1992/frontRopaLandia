@@ -8,8 +8,9 @@ import AltaProducto from './components/productos/AltaProducto'
 import { CssBaseline } from '@material-ui/core';
 import { LoginContext } from "./context/loginContext";
 import VerTienda from './components/tiendas/VerTienda';
-import Navbar from './components/Navbars/Navbar'
-import Navbar2 from './components/Navbars/Navbar2'  
+import Navbar from './components/Navbars/Navbar';
+import Navbar2 from './components/Navbars/Navbar2';
+import VerProducto from './components/productos/VerProducto';
 //import ClipLoader from 'react-spinners/ClipLoader';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route exact path="/Loguearse" component={Loguearse}/>
           <Route exact path="/ProductoTest" component={AltaProducto}/>
           <Route path="/VerTienda" component={VerTienda}/>
+          <Route path="/VerProducto" component={VerProducto} />
       </LoginContext.Provider>
     </div>
   );

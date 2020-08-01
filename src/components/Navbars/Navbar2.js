@@ -37,12 +37,41 @@ const useStyles = makeStyles((theme) => ({
 
 function Navbar2({history}) {
 
+  const switchPages = (page) => {
+    switch(page){
+      case 0:
+        history.push('/infantil')
+        break;
+      case 1:
+        history.push('/mujer')
+        break;
+      case 2:
+        history.push('/hombres')
+        break;
+      case 3:
+        history.push('/')
+        break;
+      case 4:
+        history.push('/ofertas')
+        break;
+      case 5:
+        history.push('/envios')
+        break;
+      case 6:
+        history.push('/contacto')
+        break;
+      default:
+        break;
+    }
+  }
+  
   const classes = useStyles();
 
-  const [tabValue, setTabValue] = useState(0);
+  const [tabValue, setTabValue] = useState(3);
 
   const handleChange = (e, value) => {
       setTabValue(value)
+      switchPages(value)
   }
   
   return (

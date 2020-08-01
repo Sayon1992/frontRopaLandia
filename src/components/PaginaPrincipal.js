@@ -7,6 +7,7 @@ import Carousel from 'react-material-ui-carousel';
 //import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import Tiendas from './tiendas/Tiendas';
+import tiendasJson from './../jsonPruebas/tiendas.json'
 
 const useStyles = makeStyles((theme)=>({
     root: {
@@ -34,88 +35,8 @@ const useStyles = makeStyles((theme)=>({
 
 function PaginaPrincipal({history}){
     const classes = useStyles();
-    
-    const tiendas = [{
-        "id":'asd',
-        "nombre": "Tienda 1",
-        "localidad":"Flores",
-        "ubicacion":"-34.6242747, -58.4736457",
-        "categoria":"Mujer",
-        "imagenes":[
-            {
-                "imagen":"https://laurachaparroperiodista.files.wordpress.com/2018/10/stsci-h-p1737c-z-1000x1000.png?w=800",
-                "precio":1250
-            },
-            {
-                "imagen":"https://upload.wikimedia.org/wikipedia/commons/4/47/VU-Banana-1000x1000.png",
-                "precio":860
-            },
-            {
-                "imagen":"https://i.redd.it/dr81ny8ubbky.jpg",
-                "precio":1000
-            }
-        ]
-        },{
-            "id":'qwe',
-            "nombre": "Tienda 2",
-            "localidad":"Flores",
-            "ubicacion":"-37.6242747, -59.4736457",
-            "categoria":"Mujer",
-            "imagenes":[
-                {
-                    "imagen":"https://laurachaparroperiodista.files.wordpress.com/2018/10/stsci-h-p1737c-z-1000x1000.png?w=800",
-                    "precio":1250
-                },
-                {
-                    "imagen":"https://upload.wikimedia.org/wikipedia/commons/4/47/VU-Banana-1000x1000.png",
-                    "precio":860
-                },
-                {
-                    "imagen":"https://i.redd.it/dr81ny8ubbky.jpg",
-                    "precio":1000
-                }
-            ]
-        },{
-            "id":'zxc',
-            "nombre": "Tienda 3",
-            "localidad":"Flores",
-            "ubicacion":"-35.6242747, -54.4736457",
-            "categoria":"Mujer",
-            "imagenes":[
-                {
-                    "imagen":"https://laurachaparroperiodista.files.wordpress.com/2018/10/stsci-h-p1737c-z-1000x1000.png?w=800",
-                    "precio":1250
-                },
-                {
-                    "imagen":"https://upload.wikimedia.org/wikipedia/commons/4/47/VU-Banana-1000x1000.png",
-                    "precio":860
-                },
-                {
-                    "imagen":"https://i.redd.it/dr81ny8ubbky.jpg",
-                    "precio":1000
-                }
-            ]
-        },{
-            "id":'jkl',
-            "nombre": "Tienda 4",
-            "localidad":"Flores",
-            "ubicacion":"-32.6242747, -58.4736457",
-            "categoria":"Mujer",
-            "imagenes":[
-                {
-                    "imagen":"https://laurachaparroperiodista.files.wordpress.com/2018/10/stsci-h-p1737c-z-1000x1000.png?w=800",
-                    "precio":1250
-                },
-                {
-                    "imagen":"https://upload.wikimedia.org/wikipedia/commons/4/47/VU-Banana-1000x1000.png",
-                    "precio":860
-                },
-                {
-                    "imagen":"https://i.redd.it/dr81ny8ubbky.jpg",
-                    "precio":1000
-                }
-            ]
-        }];
+
+    const tiendas = tiendasJson;
         
     // useEffect(()=>{
     //     axios.get('dummy').then(result =>{
@@ -154,7 +75,7 @@ function PaginaPrincipal({history}){
                         </Grid>
                     ))} */}
                 <Grid container spacing={10}>
-                    <Grid item md={3} >
+                    <Grid item md={3} onClick={(e, value) => {console.log(e); console.log(value)}}>
                         <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
                     </Grid>
                     <Grid item md={3} >
