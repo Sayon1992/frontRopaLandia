@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
     uploader:{
       alignItems:"center",
       alignSelf:"center"
+    },
+    containerAlta:{
+      marginTop:"10rem"
     }
   }));
 
@@ -275,11 +278,11 @@ const AltaProducto = ({history}) => {
   }
 
   return (
-    <div>
+    <div className={classes.containerAlta}>
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <Card className={classes.introduccion} variant="elevation">
+            <Card classes={{root:classes.introduccion}} variant='elevation' elevation='8'>
               <CardContent>
                 <Typography className={classes.title} gutterBottom>
                   Elegi el titulo de tu producto
@@ -297,7 +300,7 @@ const AltaProducto = ({history}) => {
           </Grid>
           <Grid item xs={12}>
             {checks.nombreProducto === true?
-            <Card className={classes.introduccion} variant="elevation">
+            <Card className={classes.introduccion} variant="elevation" elevation='8'>
               <CardContent>
                 <Typography className={classes.title} gutterBottom>
                   Elegi la categoria de tu producto
@@ -327,7 +330,7 @@ const AltaProducto = ({history}) => {
           </Grid>
           <Grid item xs={12}>
           {checks.categoriaProducto === true?
-          <Card className={classes.introduccion} variant="elevation">
+          <Card className={classes.introduccion} variant="elevation" elevation='8'>
               <CardContent>
               <Typography className={classes.title} gutterBottom>
                 Sube una imagen de tu producto
@@ -355,7 +358,7 @@ const AltaProducto = ({history}) => {
           </Grid>
           <Grid item xs={12}>
             {checks.imagenProducto === true?
-            <Card className={classes.introduccion} variant="elevation">
+            <Card className={classes.introduccion} variant="elevation" elevation='8'>
               <CardContent>
               <Typography className={classes.title} gutterBottom>
                 Elige un precio para tu producto
@@ -382,7 +385,7 @@ const AltaProducto = ({history}) => {
           </Grid>
           <Grid item xs={12}>
             {checks.imagenProducto === true ?
-            <Card className={classes.introduccion} variant="elevation">
+            <Card className={classes.introduccion} variant="elevation" elevation='8'>
               <CardContent>
                 <Button size="medium" onClick={subirProducto}>
                   Subir Producto

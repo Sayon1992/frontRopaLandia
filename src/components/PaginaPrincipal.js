@@ -1,7 +1,6 @@
 import React from 'react';
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, Container } from '@material-ui/core';
-import logo from "./../imagenes/pantalon.jpg";
 import { Productos } from './productos/Productos';
 import Carousel from 'react-material-ui-carousel';
 //import axios from 'axios';
