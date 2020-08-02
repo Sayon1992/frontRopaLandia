@@ -3,7 +3,6 @@ import { AppBar, Toolbar, Button, Menu, MenuItem, Tooltip, InputBase, useScrollT
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SearchIcon from '@material-ui/icons/Search'
-import { BrowserRouter as Router} from "react-router-dom";
 import {withRouter} from 'react-router';
 import { ContextLogin } from '../../context/loginContext';
 import { makeStyles, fade } from '@material-ui/core/styles';
@@ -107,7 +106,7 @@ function Navbar({ history }) {
 
 
   return (
-    <Router>
+    <React.Fragment>
     <div className={classes.root}>
       <ElevationScroll>
         <AppBar className={classes.root}>
@@ -171,7 +170,7 @@ function Navbar({ history }) {
     }
     </div>
     <div className={classes.navbarMargin}/>
-    </Router>
+    </React.Fragment>
   );
 }
 export default withRouter(Navbar);

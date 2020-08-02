@@ -15,6 +15,7 @@ import VerProducto from './components/productos/VerProducto';
 
 function App() {
   const [logueado, setLogueado] = useState(false)
+  const [navbar, setNavbar] = useState(true)
 
   useEffect(() => {
     var saveData = JSON.parse(localStorage.saveData || null) || {};
@@ -28,16 +29,19 @@ function App() {
 
   return (
     <div>
-      <LoginContext.Provider value={{logueado, setLogueado}}>
-      <Navbar />
-      <Navbar2 />
-      <CssBaseline />
-          <Route exact path="/" component={PaginaPrincipal}/>
-          <Route exact path="/Registrarse" component={Registrarse}/>
-          <Route exact path="/Loguearse" component={Loguearse}/>
-          <Route exact path="/ProductoTest" component={AltaProducto}/>
-          <Route path="/VerTienda" component={VerTienda}/>
-          <Route path="/VerProducto" component={VerProducto} />
+      <LoginContext.Provider value={{logueado, setLogueado, navbar, setNavbar}}>
+        <CssBaseline />
+        {navbar === true ?
+        <React.Fragment>
+        <Navbar />
+        <Navbar2 />
+        </React.Fragment>:<Navbar />}
+        <Route exact path="/" component={PaginaPrincipal}/>
+        <Route exact path="/Registrarse" component={Registrarse}/>
+        <Route exact path="/Loguearse" component={Loguearse}/>
+        <Route exact path="/ProductoTest" component={AltaProducto}/>
+        <Route path="/VerTienda" component={VerTienda}/>
+        <Route path="/VerProducto" component={VerProducto} />
       </LoginContext.Provider>
     </div>
   );

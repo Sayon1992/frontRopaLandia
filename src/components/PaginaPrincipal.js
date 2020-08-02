@@ -1,13 +1,14 @@
 import React from 'react';
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, Container } from '@material-ui/core';
-import  logo from "./../imagenes/pantalon.jpg";
+import logo from "./../imagenes/pantalon.jpg";
 import { Productos } from './productos/Productos';
 import Carousel from 'react-material-ui-carousel';
 //import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import Tiendas from './tiendas/Tiendas';
 import tiendasJson from './../jsonPruebas/tiendas.json'
+import productosTendencia from '../jsonPruebas/productosTendencia.json'
 
 const useStyles = makeStyles((theme)=>({
     root: {
@@ -37,6 +38,8 @@ function PaginaPrincipal({history}){
     const classes = useStyles();
 
     const tiendas = tiendasJson;
+
+    const productosMuestra = productosTendencia;
         
     // useEffect(()=>{
     //     axios.get('dummy').then(result =>{
@@ -61,47 +64,23 @@ function PaginaPrincipal({history}){
     },[]) **/
     return (
         <div className={classes.root}>
-            {/* <Navbar />
-            <Navbar2 /> */}
             <Container maxWidth="lg">
             <Carousel
             indicators="false"
             animation="fade"
             autoPlay="false"
             className={classes.carousel}>
-                    {/* {productosMuestra.map(producto =>(
-                        <Grid item md={3}  spacing={5}>
-                            <Productos imagen={logo} precio={producto.precio} nombre={producto.nombre} onClick={history.push('/InfoProducto')}></Productos>
-                        </Grid>
-                    ))} */}
-                <Grid container spacing={10}>
-                    <Grid item md={3} onClick={(e, value) => {console.log(e); console.log(value)}}>
-                        <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
+                {productosMuestra.map((arrayProducto, index) =>(
+                    <Grid container spacing={5} key={index}>
+                        {console.log(arrayProducto)}
+                        {arrayProducto.map(producto => (
+                            <Grid item md={3} key={producto.id} >
+                                {console.log(producto)}
+                                <Productos imagen={producto.imagen} precio={producto.precio} nombre={producto.nombre}></Productos>
+                            </Grid>
+                        ))}
                     </Grid>
-                    <Grid item md={3} >
-                        <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
-                    </Grid>
-                    <Grid item md={3} >
-                        <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
-                    </Grid>
-                    <Grid item md={3} >
-                        <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
-                    </Grid>
-                </Grid>
-                <Grid container spacing={10}>
-                    <Grid item md={3} >
-                        <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
-                    </Grid>
-                    <Grid item md={3}>
-                        <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
-                    </Grid>
-                    <Grid item md={3} >
-                        <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
-                    </Grid>
-                    <Grid item md={3} >
-                        <Productos imagen={logo} precio="1400" nombre="Pantalon"></Productos>
-                    </Grid>
-                </Grid>
+                ))}
             </Carousel>
             <Grid container>
                 {tiendas.map((tienda)=>(

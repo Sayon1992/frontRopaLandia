@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -50,19 +50,29 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1, 0, 2),
     backgroundColor: "#8ccbbe"
   },
+  container:{
+    marginTop:"5rem"
+  }
 }));
 
 function Loguearse({history}) {
 
   let saveData = JSON.parse(localStorage.saveData || null) || {};
 
-  const {setLogueado} = ContextLogin();
+  const {setLogueado, setNavbar} = ContextLogin();
 
   const classes = useStyles();
 
   const [values, setValues] = useState({
     email: '',
     password: ''
+  })
+
+  useEffect(() => {
+    setNavbar(false)
+    return () => {
+      setNavbar(true)
+    }
   })
 
   const login = {
@@ -95,7 +105,7 @@ function Loguearse({history}) {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container className={classes.container} maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

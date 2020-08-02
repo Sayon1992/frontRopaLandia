@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid, Container, makeStyles, TextField, FormControl, InputLabel, Input, InputAdornment, IconButton, Button } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-import {ApiGeneral} from '../../API/Api'
+import {ApiGeneral} from '../../API/Api';
+import {ContextLogin} from '../../context/loginContext';
 
 const useStyles = makeStyles((theme) => ({
     input:{
@@ -33,6 +34,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Registrarse() {
     const classes = useStyles();
 
+    const {setNavbar} = ContextLogin();
+
     const [values, setValues] = useState({
         password: '',
         showPassword: false,
@@ -48,6 +51,13 @@ export default function Registrarse() {
         telefonoCelular: '',
         ciudad: ''
     });
+
+    useEffect(() => {
+        setNavbar(false)
+        return () => {
+            setNavbar(true)
+        }
+    })
 
     const registro = {
         email: values.email,

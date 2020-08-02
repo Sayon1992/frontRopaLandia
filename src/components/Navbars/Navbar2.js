@@ -1,7 +1,6 @@
 import React, {useState } from 'react';
 import { AppBar, Toolbar, Tabs, Tab} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { BrowserRouter as Router} from "react-router-dom";
 import {withRouter} from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
@@ -75,7 +74,7 @@ function Navbar2({history}) {
   }
   
   return (
-    <Router>
+    <React.Fragment>
       <AppBar position="absolute" className={classes.root}>
         <Toolbar className={classes.tabHolder}>
             <Tabs value={tabValue} onChange={handleChange}>
@@ -89,7 +88,7 @@ function Navbar2({history}) {
             </Tabs>
         </Toolbar>
       </AppBar>
-    </Router>
+    </React.Fragment>
   );
 }
 export default withRouter(Navbar2);
