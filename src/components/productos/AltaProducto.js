@@ -1,59 +1,72 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import {Card, Grid, Container, Typography, CardContent, CardActions, Button, TextField, FormControl, MenuItem, InputLabel, Select, InputAdornment} from '@material-ui/core';
-import ImageUploader from 'react-images-upload';
-import imageCompression from 'browser-image-compression';
-import {ApiGeneral} from '../../API/Api';
-import { withRouter } from 'react-router-dom';
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  Card,
+  Grid,
+  Container,
+  Typography,
+  CardContent,
+  CardActions,
+  Button,
+  TextField,
+  FormControl,
+  MenuItem,
+  InputLabel,
+  Select,
+  InputAdornment,
+} from "@material-ui/core";
+import ImageUploader from "react-images-upload";
+import imageCompression from "browser-image-compression";
+import { ApiGeneral } from "../../API/Api";
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-    introduccion: {
-      minWidth: 275,
-      marginTop:'2%'
-    },
-    title: {
-      fontSize: 20,
-    },
-    aviso:{
-      fontSize: 15,
-    },
-    inputTitulo:{
-      marginTop: "1%"
-    },
-    inputSelect:{
-      minWidth: 120,
-    },
-    inputSelect2:{
-      marginLeft: "2%",
-      minWidth: 120,
-    },
-    uploader:{
-      alignItems:"center",
-      alignSelf:"center"
-    },
-    containerAlta:{
-      marginTop:"10rem"
-    }
-  }));
+  introduccion: {
+    minWidth: 275,
+    marginTop: "2%",
+  },
+  title: {
+    fontSize: 20,
+  },
+  aviso: {
+    fontSize: 15,
+  },
+  inputTitulo: {
+    marginTop: "1%",
+  },
+  inputSelect: {
+    minWidth: 120,
+  },
+  inputSelect2: {
+    marginLeft: "2%",
+    minWidth: 120,
+  },
+  uploader: {
+    alignItems: "center",
+    alignSelf: "center",
+  },
+  containerAlta: {
+    marginTop: "10rem",
+  },
+}));
 
-const AltaProducto = ({history}) => {
-  
+const AltaProducto = ({ history }) => {
   const [values, setValues] = useState({
-      tipoProducto: 0,
-      nombreProducto: '',
-      subTipoProducto: 0,
-      tipoGenero: 0,
-      precioProducto: 0
+    tipoProducto: 0,
+    nombreProducto: "",
+    subTipoProducto: 0,
+    tipoGenero: 0,
+    precioProducto: 0,
   });
 
-  const [picture,setPicture] = useState([])
+  const [picture, setPicture] = useState([]);
 
-  const [checks,setChecks] = useState({
+  const [checks, setChecks] = useState({
     nombreProducto: false,
     categoriaProducto: false,
     precioProducto: false,
-    imagenProducto:false
-  })
+    imagenProducto: false,
+  });
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -72,17 +85,22 @@ const AltaProducto = ({history}) => {
     setChecks({ ...checks, imagenProducto: !checks.imagenProducto });
   };
 
-  async function onDrop (imagen){
-    const imageFile = imagen[0];  
+  async function onDrop(imagen) {
+    const imageFile = imagen[0];
     const options = {
       maxSizeMB: 1,
       maxWidthOrHeight: 1920,
-      useWebWorker: true
-    }
+      useWebWorker: true,
+    };
     try {
       const compressedFile = await imageCompression(imageFile, options);
-      console.log('compressedFile instanceof Blob', compressedFile instanceof Blob);
-      console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`);
+      console.log(
+        "compressedFile instanceof Blob",
+        compressedFile instanceof Blob
+      );
+      console.log(
+        `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+      );
       setPicture(picture.concat(compressedFile));
     } catch (error) {
       console.log(error);
@@ -90,73 +108,74 @@ const AltaProducto = ({history}) => {
   }
 
   const subirProducto = () => {
-    ApiGeneral.post('altaProducto',{values, picture}).then((res) => {
-        if(res.data !== null && res.data !== ""){
-          history.push('/')
-        }else {
-          console.log(res.data)
+    ApiGeneral.post("altaProducto", { values, picture })
+      .then((res) => {
+        if (res.data !== null && res.data !== "") {
+          history.push("/");
+        } else {
+          console.log(res.data);
         }
-    }).catch(e => console.log(`fijate... ${e}`))
-  }
-  
+      })
+      .catch((e) => console.log(`fijate... ${e}`));
+  };
 
   const classes = useStyles();
 
   const condicionalHombreMujer = () => {
-    if(values.tipoProducto !== 0){
-      return(
+    if (values.tipoProducto !== 0) {
+      return (
         <FormControl className={classes.inputSelect2}>
-            <InputLabel id="tipoGenero">Tipo</InputLabel>
-            <Select
-              labelId="tipoGenero"
-              value={values.tipoGenero}
-              onChange={handleChange('tipoGenero')}
-              disabled={checks.categoriaProducto}
-            >
-              <MenuItem value={1}>Hombre</MenuItem>
-              <MenuItem value={2}>Mujer</MenuItem>
-              <MenuItem value={3}>Infantil</MenuItem>
-            </Select>
-          </FormControl>
-      )
+          <InputLabel id="tipoGenero">Tipo</InputLabel>
+          <Select
+            labelId="tipoGenero"
+            value={values.tipoGenero}
+            onChange={handleChange("tipoGenero")}
+            disabled={checks.categoriaProducto}
+          >
+            <MenuItem value={1}>Hombre</MenuItem>
+            <MenuItem value={2}>Mujer</MenuItem>
+            <MenuItem value={3}>Infantil</MenuItem>
+          </Select>
+        </FormControl>
+      );
     }
-  }
+  };
 
-  const condicionalTipoProducto = () =>{
-    if(values.tipoGenero === 1){
-      if(values.tipoProducto === 1){
-        return(
-            <FormControl className={classes.inputSelect2}>
-              <InputLabel id="subTipoProducto">Tipo</InputLabel>
-              <Select
-                labelId="subTipoProducto"
-                value={values.subTipoProducto}
-                onChange={handleChange('subTipoProducto')}
-                disabled={checks.categoriaProducto}
-              >
-                <MenuItem value={1}>Camperas</MenuItem>
-                <MenuItem value={2}>Remeras</MenuItem>
-                <MenuItem value={3}>Buzos</MenuItem>
-                <MenuItem value={4}>Sweaters</MenuItem>
-                <MenuItem value={5}>Jeans</MenuItem>
-                <MenuItem value={6}>Ropa Interior</MenuItem>
-                <MenuItem value={7}>Cardigans</MenuItem>
-                <MenuItem value={8}>Chombas</MenuItem>
-                <MenuItem value={9}>Pantalones</MenuItem>
-                <MenuItem value={10}>Joggings</MenuItem>
-                <MenuItem value={11}>Chalecos</MenuItem>
-                <MenuItem value={12}>Trajes de baño</MenuItem>
-              </Select>
-            </FormControl>
-        );
-      }else if(values.tipoProducto === 2){
-        return(
+  const condicionalTipoProducto = () => {
+    if (values.tipoGenero === 1) {
+      if (values.tipoProducto === 1) {
+        return (
           <FormControl className={classes.inputSelect2}>
             <InputLabel id="subTipoProducto">Tipo</InputLabel>
             <Select
               labelId="subTipoProducto"
               value={values.subTipoProducto}
-              onChange={handleChange('subTipoProducto')}
+              onChange={handleChange("subTipoProducto")}
+              disabled={checks.categoriaProducto}
+            >
+              <MenuItem value={1}>Camperas</MenuItem>
+              <MenuItem value={2}>Remeras</MenuItem>
+              <MenuItem value={3}>Buzos</MenuItem>
+              <MenuItem value={4}>Sweaters</MenuItem>
+              <MenuItem value={5}>Jeans</MenuItem>
+              <MenuItem value={6}>Ropa Interior</MenuItem>
+              <MenuItem value={7}>Cardigans</MenuItem>
+              <MenuItem value={8}>Chombas</MenuItem>
+              <MenuItem value={9}>Pantalones</MenuItem>
+              <MenuItem value={10}>Joggings</MenuItem>
+              <MenuItem value={11}>Chalecos</MenuItem>
+              <MenuItem value={12}>Trajes de baño</MenuItem>
+            </Select>
+          </FormControl>
+        );
+      } else if (values.tipoProducto === 2) {
+        return (
+          <FormControl className={classes.inputSelect2}>
+            <InputLabel id="subTipoProducto">Tipo</InputLabel>
+            <Select
+              labelId="subTipoProducto"
+              value={values.subTipoProducto}
+              onChange={handleChange("subTipoProducto")}
               disabled={checks.categoriaProducto}
             >
               <MenuItem value={1}>Zapatillas</MenuItem>
@@ -170,14 +189,14 @@ const AltaProducto = ({history}) => {
             </Select>
           </FormControl>
         );
-      }else if(values.tipoProducto === 3){
-        return(
+      } else if (values.tipoProducto === 3) {
+        return (
           <FormControl className={classes.inputSelect2}>
             <InputLabel id="subTipoProducto">Tipo</InputLabel>
             <Select
               labelId="subTipoProducto"
               value={values.subTipoProducto}
-              onChange={handleChange('subTipoProducto')}
+              onChange={handleChange("subTipoProducto")}
               disabled={checks.categoriaProducto}
             >
               <MenuItem value={1}>Mochilas</MenuItem>
@@ -194,15 +213,15 @@ const AltaProducto = ({history}) => {
         );
       }
     }
-    if(values.tipoGenero === 2){
-      if(values.tipoProducto === 1){
-        return(
+    if (values.tipoGenero === 2) {
+      if (values.tipoProducto === 1) {
+        return (
           <FormControl className={classes.inputSelect2}>
             <InputLabel id="subTipoProducto">Tipo</InputLabel>
             <Select
               labelId="subTipoProducto"
               value={values.subTipoProducto}
-              onChange={handleChange('subTipoProducto')}
+              onChange={handleChange("subTipoProducto")}
               disabled={checks.categoriaProducto}
             >
               <MenuItem value={1}>Blusas</MenuItem>
@@ -222,14 +241,14 @@ const AltaProducto = ({history}) => {
           </FormControl>
         );
       }
-      if(values.tipoProducto === 2){
-        return(
+      if (values.tipoProducto === 2) {
+        return (
           <FormControl className={classes.inputSelect2}>
             <InputLabel id="subTipoProducto">Tipo</InputLabel>
             <Select
               labelId="subTipoProducto"
               value={values.subTipoProducto}
-              onChange={handleChange('subTipoProducto')}
+              onChange={handleChange("subTipoProducto")}
               disabled={checks.categoriaProducto}
             >
               <MenuItem value={1}>Botas</MenuItem>
@@ -247,14 +266,14 @@ const AltaProducto = ({history}) => {
           </FormControl>
         );
       }
-      if(values.tipoProducto === 3){
-        return(
+      if (values.tipoProducto === 3) {
+        return (
           <FormControl className={classes.inputSelect2}>
             <InputLabel id="subTipoProducto">Tipo</InputLabel>
             <Select
               labelId="subTipoProducto"
               value={values.subTipoProducto}
-              onChange={handleChange('subTipoProducto')}
+              onChange={handleChange("subTipoProducto")}
               disabled={checks.categoriaProducto}
             >
               <MenuItem value={1}>Anteojos</MenuItem>
@@ -275,130 +294,206 @@ const AltaProducto = ({history}) => {
         );
       }
     }
-  }
+  };
 
   return (
     <div className={classes.containerAlta}>
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <Card classes={{root:classes.introduccion}} variant='elevation' elevation='8'>
+            <Card
+              classes={{ root: classes.introduccion }}
+              variant="elevation"
+              elevation="8"
+            >
               <CardContent>
                 <Typography className={classes.title} gutterBottom>
                   Elegi el titulo de tu producto
                 </Typography>
                 <Typography className={classes.aviso}>
-                  Recorda, que el titulo es lo esencial por lo que se va a buscar tu producto, aparte de la categoria y su descripcion
+                  Recorda, que el titulo es lo esencial por lo que se va a
+                  buscar tu producto, aparte de la categoria y su descripcion
                 </Typography>
-                <TextField fullWidth disabled={checks.nombreProducto} className={classes.inputTitulo} label="Titulo de producto" onChange={handleChange('nombreProducto')}/>
-              </CardContent>
-              <CardActions>
-                <Button size="small" disabled={checks.nombreProducto} onClick={handleCheckNombreProducto}>Listo</Button>
-                <Button size="small" disabled={!checks.nombreProducto} onClick={handleCheckNombreProducto}>Atras</Button>
-              </CardActions>
-            </Card>
-          </Grid>
-          <Grid item xs={12}>
-            {checks.nombreProducto === true?
-            <Card className={classes.introduccion} variant="elevation" elevation='8'>
-              <CardContent>
-                <Typography className={classes.title} gutterBottom>
-                  Elegi la categoria de tu producto
-                </Typography>
-                <FormControl className={classes.inputSelect}>
-                  <InputLabel id="tipoProducto">Tipo</InputLabel>
-                  <Select
-                    labelId="tipoProducto"
-                    value={values.tipoProducto}
-                    onChange={handleChange('tipoProducto')}
-                    disabled={checks.categoriaProducto}
-                  >
-                    <MenuItem value={1}>Ropa</MenuItem>
-                    <MenuItem value={2}>Calzados</MenuItem>
-                    <MenuItem value={3}>Accesorios</MenuItem>
-                  </Select>
-                </FormControl>
-                {condicionalHombreMujer()}
-                {condicionalTipoProducto()}
-              </CardContent>
-              <CardActions>
-                <Button size="small" disabled={checks.categoriaProducto} onClick={handleCheckCategoriaProducto}>Listo</Button>
-                <Button size="small" disabled={!checks.categoriaProducto} onClick={handleCheckCategoriaProducto}>Atras</Button>
-              </CardActions>
-            </Card>
-            :null}
-          </Grid>
-          <Grid item xs={12}>
-          {checks.categoriaProducto === true?
-          <Card className={classes.introduccion} variant="elevation" elevation='8'>
-              <CardContent>
-              <Typography className={classes.title} gutterBottom>
-                Sube una imagen de tu producto
-              </Typography>
-              <div className={classes.uploader}>  
-                <ImageUploader
-                withLabel
-                withPreview
-                label="5MB Máximo. jpg o png"
-                withIcon={true}
-                buttonText='Elegir Imagenes'
-                onChange={onDrop}
-                imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                maxFileSize={5242880}
-                fileSizeError="La imagen es demsiado pesada"
+                <TextField
+                  fullWidth
+                  disabled={checks.nombreProducto}
+                  className={classes.inputTitulo}
+                  label="Titulo de producto"
+                  onChange={handleChange("nombreProducto")}
                 />
-              </div>
               </CardContent>
               <CardActions>
-              <Button size="small" disabled={checks.imagenProducto} onClick={handleCheckImagenProducto}>Listo</Button>
-              <Button size="small" disabled={!checks.imagenProducto} onClick={handleCheckImagenProducto}>Atras</Button>
-              </CardActions>
-            </Card>
-            :null}
-          </Grid>
-          <Grid item xs={12}>
-            {checks.imagenProducto === true?
-            <Card className={classes.introduccion} variant="elevation" elevation='8'>
-              <CardContent>
-              <Typography className={classes.title} gutterBottom>
-                Elige un precio para tu producto
-              </Typography>
-              <TextField
-                className={classes.uploader}
-                label="Precio"
-                id="Precio"
-                InputProps={{
-                  startAdornment: <InputAdornment position="start">$</InputAdornment>,
-                }}
-                type='number'
-                variant="outlined"
-                onChange={handleChange('precioProducto')}
-                value={values.precioProducto}
-              />
-              </CardContent>
-              <CardActions>
-              <Button size="small" disabled={checks.precioProducto} onClick={handleCheckPrecioProducto}>Listo</Button>
-              <Button size="small" disabled={!checks.precioProducto} onClick={handleCheckPrecioProducto}>Atras</Button>
-              </CardActions>
-            </Card>
-            :null}
-          </Grid>
-          <Grid item xs={12}>
-            {checks.imagenProducto === true ?
-            <Card className={classes.introduccion} variant="elevation" elevation='8'>
-              <CardContent>
-                <Button size="medium" onClick={subirProducto}>
-                  Subir Producto
+                <Button
+                  size="small"
+                  disabled={checks.nombreProducto}
+                  onClick={handleCheckNombreProducto}
+                >
+                  Listo
                 </Button>
-              </CardContent>
+                <Button
+                  size="small"
+                  disabled={!checks.nombreProducto}
+                  onClick={handleCheckNombreProducto}
+                >
+                  Atras
+                </Button>
+              </CardActions>
             </Card>
-            :null}
+          </Grid>
+          <Grid item xs={12}>
+            {checks.nombreProducto === true ? (
+              <Card
+                className={classes.introduccion}
+                variant="elevation"
+                elevation="8"
+              >
+                <CardContent>
+                  <Typography className={classes.title} gutterBottom>
+                    Elegi la categoria de tu producto
+                  </Typography>
+                  <FormControl className={classes.inputSelect}>
+                    <InputLabel id="tipoProducto">Tipo</InputLabel>
+                    <Select
+                      labelId="tipoProducto"
+                      value={values.tipoProducto}
+                      onChange={handleChange("tipoProducto")}
+                      disabled={checks.categoriaProducto}
+                    >
+                      <MenuItem value={1}>Ropa</MenuItem>
+                      <MenuItem value={2}>Calzados</MenuItem>
+                      <MenuItem value={3}>Accesorios</MenuItem>
+                    </Select>
+                  </FormControl>
+                  {condicionalHombreMujer()}
+                  {condicionalTipoProducto()}
+                </CardContent>
+                <CardActions>
+                  <Button
+                    size="small"
+                    disabled={checks.categoriaProducto}
+                    onClick={handleCheckCategoriaProducto}
+                  >
+                    Listo
+                  </Button>
+                  <Button
+                    size="small"
+                    disabled={!checks.categoriaProducto}
+                    onClick={handleCheckCategoriaProducto}
+                  >
+                    Atras
+                  </Button>
+                </CardActions>
+              </Card>
+            ) : null}
+          </Grid>
+          <Grid item xs={12}>
+            {checks.categoriaProducto === true ? (
+              <Card
+                className={classes.introduccion}
+                variant="elevation"
+                elevation="8"
+              >
+                <CardContent>
+                  <Typography className={classes.title} gutterBottom>
+                    Sube una imagen de tu producto
+                  </Typography>
+                  <div className={classes.uploader}>
+                    <ImageUploader
+                      withLabel
+                      withPreview
+                      label="5MB Máximo. jpg o png"
+                      withIcon={true}
+                      buttonText="Elegir Imagenes"
+                      onChange={onDrop}
+                      imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+                      maxFileSize={5242880}
+                      fileSizeError="La imagen es demsiado pesada"
+                    />
+                  </div>
+                </CardContent>
+                <CardActions>
+                  <Button
+                    size="small"
+                    disabled={checks.imagenProducto}
+                    onClick={handleCheckImagenProducto}
+                  >
+                    Listo
+                  </Button>
+                  <Button
+                    size="small"
+                    disabled={!checks.imagenProducto}
+                    onClick={handleCheckImagenProducto}
+                  >
+                    Atras
+                  </Button>
+                </CardActions>
+              </Card>
+            ) : null}
+          </Grid>
+          <Grid item xs={12}>
+            {checks.imagenProducto === true ? (
+              <Card
+                className={classes.introduccion}
+                variant="elevation"
+                elevation="8"
+              >
+                <CardContent>
+                  <Typography className={classes.title} gutterBottom>
+                    Elige un precio para tu producto
+                  </Typography>
+                  <TextField
+                    className={classes.uploader}
+                    label="Precio"
+                    id="Precio"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">$</InputAdornment>
+                      ),
+                    }}
+                    type="number"
+                    variant="outlined"
+                    onChange={handleChange("precioProducto")}
+                    value={values.precioProducto}
+                  />
+                </CardContent>
+                <CardActions>
+                  <Button
+                    size="small"
+                    disabled={checks.precioProducto}
+                    onClick={handleCheckPrecioProducto}
+                  >
+                    Listo
+                  </Button>
+                  <Button
+                    size="small"
+                    disabled={!checks.precioProducto}
+                    onClick={handleCheckPrecioProducto}
+                  >
+                    Atras
+                  </Button>
+                </CardActions>
+              </Card>
+            ) : null}
+          </Grid>
+          <Grid item xs={12}>
+            {checks.imagenProducto === true ? (
+              <Card
+                className={classes.introduccion}
+                variant="elevation"
+                elevation="8"
+              >
+                <CardContent>
+                  <Button size="medium" onClick={subirProducto}>
+                    Subir Producto
+                  </Button>
+                </CardContent>
+              </Card>
+            ) : null}
           </Grid>
         </Grid>
       </Container>
     </div>
+  );
+};
 
-     );
-}
- 
 export default withRouter(AltaProducto);

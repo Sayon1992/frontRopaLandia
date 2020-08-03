@@ -1,31 +1,30 @@
-import React, {useState, useEffect} from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import {ApiGeneral} from '../../API/Api'
-import {ContextLogin} from '../../context/loginContext'
-import { withRouter } from 'react-router-dom';
-
+import React, { useState, useEffect } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { ApiGeneral } from "../../API/Api";
+import { ContextLogin } from "../../context/loginContext";
+import { withRouter } from "react-router-dom";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" href="localhost:3000">
         RopaLandia
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -33,71 +32,72 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: '#faeee7',
-    color: "black"
+    backgroundColor: "#faeee7",
+    color: "black",
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
     margin: theme.spacing(1, 0, 2),
-    backgroundColor: "#8ccbbe"
+    backgroundColor: "#8ccbbe",
   },
-  container:{
-    marginTop:"5rem"
-  }
+  container: {
+    marginTop: "5rem",
+  },
 }));
 
-function Loguearse({history}) {
-
+function Loguearse({ history }) {
   let saveData = JSON.parse(localStorage.saveData || null) || {};
 
-  const {setLogueado, setNavbar} = ContextLogin();
+  const { setLogueado, setNavbar } = ContextLogin();
 
   const classes = useStyles();
 
   const [values, setValues] = useState({
-    email: '',
-    password: ''
-  })
+    email: "",
+    password: "",
+  });
 
   useEffect(() => {
-    setNavbar(false)
+    setNavbar(false);
     return () => {
-      setNavbar(true)
-    }
-  })
+      setNavbar(true);
+    };
+  });
 
   const login = {
     email: values.email,
-    password: values.password
-  }
+    password: values.password,
+  };
 
-  const loguearse = () =>{
-    ApiGeneral.post('loguearse',{login}).then((res) => {
-        if(res.data !== null && res.data !== ""){
+  const loguearse = () => {
+    ApiGeneral.post("loguearse", { login })
+      .then((res) => {
+        if (res.data !== null && res.data !== "") {
           saveData.obj = res.data;
           saveData.time = new Date().getTime();
           localStorage.saveData = JSON.stringify(saveData);
           setLogueado(true);
-          history.push('/')
-        }else {
-          console.log(res.data)
+          history.push("/");
+        } else {
+          console.log(res.data);
         }
-    }).catch(e => console.log(`fijate... ${e}`))
-  }
+      })
+      .catch((e) => console.log(`fijate... ${e}`));
+  };
 
   async function handleSubmit(event) {
     event.preventDefault();
     await loguearse();
-    alert('logueado')
+    alert("logueado");
   }
 
   const handleChange = (prop) => (event) => {
@@ -126,7 +126,7 @@ function Loguearse({history}) {
             autoComplete="email"
             autoFocus
             value={values.email}
-            onChange = {handleChange('email')} 
+            onChange={handleChange("email")}
           />
           <TextField
             variant="outlined"
@@ -139,7 +139,7 @@ function Loguearse({history}) {
             id="password"
             value={values.password}
             autoComplete="current-password"
-            onChange={handleChange('password')}
+            onChange={handleChange("password")}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -174,4 +174,4 @@ function Loguearse({history}) {
   );
 }
 
-export default withRouter(Loguearse)
+export default withRouter(Loguearse);

@@ -1,17 +1,17 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab");
 
-.MuiAppBar-colorSecondary{
-  color: #454545
+.MuiAppBar-colorSecondary {
+  color: #454545;
 }
-.Trending{
+.Trending {
   text-align: center;
-  font-family: 'Roboto Slab';
+  font-family: "Roboto Slab";
 }
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
