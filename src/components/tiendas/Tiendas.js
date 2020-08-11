@@ -14,7 +14,6 @@ const Tiendas = (props) => {
   const classes = useStyles();
 
   const irATienda = (irAtienda) => {
-    console.log(irAtienda);
     const urlTienda = irAtienda.nombre.replace(" ", "-");
     props.history.push(`/VerTienda/${urlTienda}-${irAtienda.id}`);
   };

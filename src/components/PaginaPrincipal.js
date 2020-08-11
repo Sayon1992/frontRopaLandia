@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, Container } from "@material-ui/core";
-import { Productos } from "./productos/Productos";
+import CardProducto from "./productos/CardProducto";
 import Carousel from "react-material-ui-carousel";
 //import axios from 'axios';
 import { withRouter } from "react-router-dom";
@@ -72,15 +72,13 @@ function PaginaPrincipal({ history }) {
         >
           {productosMuestra.map((arrayProducto, index) => (
             <Grid container spacing={5} key={index}>
-              {console.log(arrayProducto)}
               {arrayProducto.map((producto) => (
                 <Grid item md={3} key={producto.id}>
-                  {console.log(producto)}
-                  <Productos
+                  <CardProducto
                     imagen={producto.imagen}
                     precio={producto.precio}
                     nombre={producto.nombre}
-                  ></Productos>
+                  ></CardProducto>
                 </Grid>
               ))}
             </Grid>

@@ -5,7 +5,7 @@ import { withRouter } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: "#0b032d",
+    backgroundColor: "#f96d80",
     color: "black",
     boxShadow: "none",
     display: "flex",

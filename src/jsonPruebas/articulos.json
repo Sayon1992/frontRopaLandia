@@ -1,0 +1,110 @@
+[
+  [
+    {
+      "Pantalones": [
+        {
+          "id": "pantalon1",
+          "imagen": "https://www.newbalance.com.ar/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/p/a/pantalon-mujer-new-balance-essentials-ft-sweatpant-wp83552ag_nb_40_i.jpg",
+          "precio": 1250,
+          "stock": 3
+        },
+        {
+          "id": "pantalon2",
+          "imagen": "https://www.newbalance.com.ar/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/p/a/pantalon-mujer-new-balance-essentials-ft-sweatpant-wp83552ag_nb_40_i.jpg",
+          "precio": 1250,
+          "stock": 1
+        },
+        {
+          "id": "pantalon3",
+          "imagen": "https://www.newbalance.com.ar/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/p/a/pantalon-mujer-new-balance-essentials-ft-sweatpant-wp83552ag_nb_40_i.jpg",
+          "precio": 1250,
+          "stock": 5
+        },
+        {
+          "id": "pantalon4",
+          "imagen": "https://www.newbalance.com.ar/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/p/a/pantalon-mujer-new-balance-essentials-ft-sweatpant-wp83552ag_nb_40_i.jpg",
+          "precio": 1250,
+          "stock": 2
+        },
+        {
+          "id": "pantalon5",
+          "imagen": "https://www.newbalance.com.ar/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/p/a/pantalon-mujer-new-balance-essentials-ft-sweatpant-wp83552ag_nb_40_i.jpg",
+          "precio": 1250,
+          "stock": 3
+        },
+        {
+          "id": "pantalon6",
+          "imagen": "https://www.newbalance.com.ar/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/p/a/pantalon-mujer-new-balance-essentials-ft-sweatpant-wp83552ag_nb_40_i.jpg",
+          "precio": 1250,
+          "stock": 0
+        }
+      ]
+    }
+  ],
+  [
+    {
+      "Remeras": [
+        {
+          "id": "remera1",
+          "imagen": "https://www.newbalance.com.ar/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/p/a/pantalon-mujer-new-balance-essentials-ft-sweatpant-wp83552ag_nb_40_i.jpg",
+          "precio": 1250,
+          "stock": 3
+        },
+        {
+          "id": "remera2",
+          "imagen": "https://www.newbalance.com.ar/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/p/a/pantalon-mujer-new-balance-essentials-ft-sweatpant-wp83552ag_nb_40_i.jpg",
+          "precio": 1250,
+          "stock": 1
+        },
+        {
+          "id": "remera3",
+          "imagen": "https://www.newbalance.com.ar/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/p/a/pantalon-mujer-new-balance-essentials-ft-sweatpant-wp83552ag_nb_40_i.jpg",
+          "precio": 1250,
+          "stock": 5
+        },
+        {
+          "id": "remera4",
+          "imagen": "https://www.newbalance.com.ar/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/p/a/pantalon-mujer-new-balance-essentials-ft-sweatpant-wp83552ag_nb_40_i.jpg",
+          "precio": 1250,
+          "stock": 2
+        },
+        {
+          "id": "remera5",
+          "imagen": "https://www.newbalance.com.ar/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/p/a/pantalon-mujer-new-balance-essentials-ft-sweatpant-wp83552ag_nb_40_i.jpg",
+          "precio": 1250,
+          "stock": 3
+        }
+      ]
+    }
+  ],
+  [
+    {
+      "Calzado": [
+        {
+          "id": "calzado1",
+          "imagen": "https://www.newbalance.com.ar/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/p/a/pantalon-mujer-new-balance-essentials-ft-sweatpant-wp83552ag_nb_40_i.jpg",
+          "precio": 1250,
+          "stock": 3
+        }
+      ]
+    }
+  ],
+  [
+    {
+      "Vestido": [
+        {
+          "id": "vestido1",
+          "imagen": "https://www.newbalance.com.ar/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/p/a/pantalon-mujer-new-balance-essentials-ft-sweatpant-wp83552ag_nb_40_i.jpg",
+          "precio": 1250,
+          "stock": 3
+        },
+        {
+          "id": "vestido2",
+          "imagen": "https://www.newbalance.com.ar/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/p/a/pantalon-mujer-new-balance-essentials-ft-sweatpant-wp83552ag_nb_40_i.jpg",
+          "precio": 1250,
+          "stock": 3
+        }
+      ]
+    }
+  ]
+]
