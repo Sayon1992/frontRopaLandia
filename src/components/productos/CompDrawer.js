@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CompDrawer = ({ articulos }) => {
+const CompDrawer = ({ articulos, limitarArticulos }) => {
   const classes = useStyles();
 
   const [checked, setChecked] = useState([0]);
@@ -62,7 +62,7 @@ const CompDrawer = ({ articulos }) => {
     } else {
       newChecked.splice(currentIndex, 1);
     }
-
+    limitarArticulos(newChecked);
     setChecked(newChecked);
   };
 
@@ -109,7 +109,7 @@ const CompDrawer = ({ articulos }) => {
                   inputProps={{ "aria-labelledby": labelId }}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`${Object.keys(item[0])}`} />
+              <ListItemText id={labelId} primary={itemNombre} />
               <ListItemText>{`(${itemValor.length})`}</ListItemText>
             </ListItem>
           );

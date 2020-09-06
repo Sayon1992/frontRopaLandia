@@ -1,0 +1,15 @@
+{
+    "genero":{
+        "hombre":1,
+        "mujer":2,
+        "ninos":3
+    },
+    "categorias":{
+        "ropa": 1,
+        "calzado":2,
+        "accesorios":3
+    },
+    "subCategorias":[
+        
+    ]
+}
