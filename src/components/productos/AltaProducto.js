@@ -17,8 +17,9 @@ import {
 } from "@material-ui/core";
 import ImageUploader from "react-images-upload";
 import imageCompression from "browser-image-compression";
-import { ApiGeneral } from "../../API/Api";
+import * as productsActions from "../../store/actions/products";
 import { withRouter } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   introduccion: {
@@ -58,6 +59,8 @@ const AltaProducto = ({ history }) => {
     tipoGenero: 0,
     precioProducto: 0,
   });
+
+  const dispatch = useDispatch();
 
   const [picture, setPicture] = useState([]);
 
@@ -107,16 +110,12 @@ const AltaProducto = ({ history }) => {
     }
   }
 
-  const subirProducto = () => {
-    ApiGeneral.post("altaProducto", { values, picture })
-      .then((res) => {
-        if (res.data !== null && res.data !== "") {
-          history.push("/");
-        } else {
-          console.log(res.data);
-        }
-      })
-      .catch((e) => console.log(`fijate... ${e}`));
+  const subirProducto = async () => {
+    try {
+      await dispatch(productsActions.altaProducto(values, picture));
+    } catch (e) {
+      throw new Error(e.message);
+    }
   };
 
   const classes = useStyles();

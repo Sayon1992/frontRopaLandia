@@ -8,6 +8,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   precio: {
@@ -17,6 +18,11 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 250,
     backgroundColor: "#fbf4f9",
     borderRadius: 25,
+    border: {
+      color: "red",
+      width: 10,
+      style: "solid",
+    },
   },
   mostrarMas: {
     display: "flex",
@@ -36,8 +42,14 @@ const useStyles = makeStyles((theme) => ({
 function CardProducto(props) {
   const classes = useStyles();
 
+  const irAProducto = async () => {
+    const urlProducto = props.nombre.replace(" ", "-");
+    const urlTienda = props.tienda.replace(" ", "-");
+    props.history.push(`/VerProducto/${urlTienda}-${urlProducto}-${props.id}`);
+  };
+
   return (
-    <div>
+    <div onClick={irAProducto}>
       <Card className={classes.imagen}>
         <CardActionArea>
           <CardMedia
@@ -67,4 +79,4 @@ function CardProducto(props) {
   );
 }
 
-export default CardProducto;
+export default withRouter(CardProducto);

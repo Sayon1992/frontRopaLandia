@@ -75,9 +75,11 @@ function PaginaPrincipal({ history }) {
               {arrayProducto.map((producto) => (
                 <Grid item md={3} key={producto.id}>
                   <CardProducto
+                    id={producto.id}
                     imagen={producto.imagen}
                     precio={producto.precio}
                     nombre={producto.nombre}
+                    tienda={producto.tienda}
                   ></CardProducto>
                 </Grid>
               ))}

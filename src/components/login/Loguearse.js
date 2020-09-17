@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  Container,
+} from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import { ApiGeneral } from "../../API/Api";
 import { ContextLogin } from "../../context/loginContext";
 import { withRouter } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import * as authActions from "../../store/actions/auth";
 
 function Copyright() {
   return (
@@ -55,9 +58,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Loguearse({ history }) {
-  let saveData = JSON.parse(localStorage.saveData || null) || {};
+  const { setNavbar } = ContextLogin();
 
-  const { setLogueado, setNavbar } = ContextLogin();
+  const dispatch = useDispatch();
 
   const classes = useStyles();
 
@@ -78,20 +81,8 @@ function Loguearse({ history }) {
     password: values.password,
   };
 
-  const loguearse = () => {
-    ApiGeneral.post("loguearse", { login })
-      .then((res) => {
-        if (res.data !== null && res.data !== "") {
-          saveData.obj = res.data;
-          saveData.time = new Date().getTime();
-          localStorage.saveData = JSON.stringify(saveData);
-          setLogueado(true);
-          history.push("/");
-        } else {
-          console.log(res.data);
-        }
-      })
-      .catch((e) => console.log(`fijate... ${e}`));
+  const loguearse = async () => {
+    await dispatch(authActions.login(login));
   };
 
   async function handleSubmit(event) {

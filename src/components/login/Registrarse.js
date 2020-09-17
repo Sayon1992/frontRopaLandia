@@ -10,10 +10,13 @@ import {
   InputAdornment,
   IconButton,
   Button,
+  Select,
+  MenuItem,
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import { ApiGeneral } from "../../API/Api";
 import { ContextLogin } from "../../context/loginContext";
+import * as authActions from "../../store/actions/auth";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -36,7 +39,10 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
   },
   colorBoton: {
-    backgroundColor: "",
+    marginTop: 50,
+  },
+  container: {
+    marginTop: 70,
   },
 }));
 
@@ -59,6 +65,10 @@ export default function Registrarse() {
     documento: "",
     telefonoCelular: "",
     ciudad: "",
+    tipoCliente: 1,
+    tipoTienda: 1,
+    numeroPiso: "",
+    cuit: "",
   });
 
   useEffect(() => {
@@ -68,17 +78,87 @@ export default function Registrarse() {
     };
   });
 
-  const registro = {
-    email: values.email,
-    nombreCompleto: values.nombreCompleto,
-    password: values.password,
-    fechaNacimiento: values.fechaNacimiento,
-    direccionCalle: values.direccionCalle,
-    direccionNumero: values.direccionNumero,
-    codigoPostal: values.codigoPostal,
-    documento: values.documento,
-    telefonoCelular: values.telefonoCelular,
-    ciudad: values.ciudad,
+  const dispatch = useDispatch();
+
+  // const registro = {
+  //   email: values.email,
+  //   nombreCompleto: values.nombreCompleto,
+  //   password: values.password,
+  //   fechaNacimiento: values.fechaNacimiento,
+  //   direccionCalle: values.direccionCalle,
+  //   direccionNumero: values.direccionNumero,
+  //   codigoPostal: values.codigoPostal,
+  //   documento: values.documento,
+  //   telefonoCelular: values.telefonoCelular,
+  //   ciudad: values.ciudad,
+  //   tipoCliente: values.tipoCliente,
+  //   tipoTienda: values.tipoTienda,
+  // };
+
+  const vendedor = () => {
+    return (
+      <React.Fragment>
+        <Grid item md={3} className={classes.input}>
+          <InputLabel id="tipoTienda">Tipo de tienda</InputLabel>
+          <Select
+            labelId="tipoTienda"
+            id="selectTienda"
+            value={values.tipoTienda}
+            onChange={handleChange("tipoTienda")}
+            fullWidth
+          >
+            <MenuItem value={1}>Unisex</MenuItem>
+            <MenuItem value={2}>Mujer</MenuItem>
+            <MenuItem value={3}>Hombre</MenuItem>
+            <MenuItem value={4}>Niños</MenuItem>
+          </Select>
+        </Grid>
+        <Grid item md={1} />
+        <Grid item md={3}>
+          <form className={classes.input} noValidate autoComplete="off">
+            <TextField
+              label="CUIT"
+              fullWidth
+              type="number"
+              value={values.cuit}
+              onChange={handleChange("cuit")}
+            />
+          </form>
+        </Grid>
+      </React.Fragment>
+    );
+  };
+
+  const comprador = () => {
+    return (
+      <React.Fragment>
+        <Grid item md={3} className={classes.input}>
+          <TextField
+            label="F.Nacimiento"
+            type="date"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            fullWidth
+            format="DD-MM-AAAA"
+            value={values.fechaNacimiento}
+            onChange={handleChange("fechaNacimiento")}
+          />
+        </Grid>
+        <Grid item md={1} />
+        <Grid item md={3}>
+          <form className={classes.input} noValidate autoComplete="off">
+            <TextField
+              label="CUIT"
+              fullWidth
+              type="number"
+              value={values.cuit}
+              onChange={handleChange("cuit")}
+            />
+          </form>
+        </Grid>
+      </React.Fragment>
+    );
   };
 
   const handleChange = (prop) => (event) => {
@@ -97,30 +177,20 @@ export default function Registrarse() {
     event.preventDefault();
   };
 
-  const registarUsuario = () => {
-    ApiGeneral.post("Registrarse", { registro })
-      .then((respuesta) => {
-        if (respuesta.data === true) {
-          console.log("Usuario Registrado");
-        } else {
-          console.log(respuesta);
-        }
-      })
-      .catch((e) => {
-        console.log(`fijate... ${e}`);
-      });
+  const registarUsuario = async () => {
+    await dispatch(authActions.signUp(values));
   };
 
   return (
     <div className={classes.root}>
-      <Container maxWidth="md">
+      <Container maxWidth="md" className={classes.container}>
         <Grid container spacing={0}>
           <Grid item md={11}>
             <form className={classes.input} noValidate autoComplete="off">
               <TextField
                 label="Nombre y apellido"
                 fullWidth
-                value={registro.nombreCompleto}
+                value={values.nombreCompleto}
                 onChange={handleChange("nombreCompleto")}
               />
             </form>
@@ -132,7 +202,7 @@ export default function Registrarse() {
               <TextField
                 label="Email"
                 fullWidth
-                value={registro.email}
+                value={values.email}
                 onChange={handleChange("email")}
               />
             </form>
@@ -198,7 +268,7 @@ export default function Registrarse() {
               <TextField
                 label="Direccion"
                 fullWidth
-                value={registro.direccionCalle}
+                value={values.direccionCalle}
                 onChange={handleChange("direccionCalle")}
               />
             </form>
@@ -210,7 +280,7 @@ export default function Registrarse() {
                 label="Numero"
                 fullWidth
                 type="number"
-                value={registro.direccionNumero}
+                value={values.direccionNumero}
                 onChange={handleChange("direccionNumero")}
               />
             </form>
@@ -222,7 +292,7 @@ export default function Registrarse() {
                 label="C.P"
                 type="number"
                 fullWidth
-                value={registro.codigoPostal}
+                value={values.codigoPostal}
                 onChange={handleChange("codigoPostal")}
               />
             </form>
@@ -233,25 +303,36 @@ export default function Registrarse() {
               <TextField
                 label="Ciudad"
                 fullWidth
-                value={registro.ciudad}
+                value={values.ciudad}
                 onChange={handleChange("ciudad")}
               />
             </form>
           </Grid>
         </Grid>
         <Grid container>
+          <Grid item md={3}>
+            <form className={classes.input} noValidate autoComplete="off">
+              <TextField
+                label="Numero/Piso"
+                fullWidth
+                value={values.numeroPise}
+                onChange={handleChange("numeroPiso")}
+              />
+            </form>
+          </Grid>
+          <Grid item md={1} />
           <Grid item md={3} className={classes.input}>
-            <TextField
-              label="F.Nacimiento"
-              type="date"
-              InputLabelProps={{
-                shrink: true,
-              }}
+            <InputLabel id="demo-simple-select-label">Tipo</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={values.tipoCliente}
+              onChange={handleChange("tipoCliente")}
               fullWidth
-              format="DD-MM-AAAA"
-              value={registro.fechaNacimiento}
-              onChange={handleChange("fechaNacimiento")}
-            />
+            >
+              <MenuItem value={1}>Vendedor</MenuItem>
+              <MenuItem value={2}>Comprador</MenuItem>
+            </Select>
           </Grid>
           <Grid item md={1} />
           <Grid item md={3}>
@@ -260,23 +341,27 @@ export default function Registrarse() {
                 label="Documento"
                 fullWidth
                 type="number"
-                value={registro.documento}
+                value={values.documento}
                 onChange={handleChange("documento")}
               />
             </form>
           </Grid>
           <Grid item md={1} />
+        </Grid>
+        <Grid container>
           <Grid item md={3}>
             <form className={classes.input} noValidate autoComplete="off">
               <TextField
                 type="number"
                 label="Celular/Telefono"
                 fullWidth
-                value={registro.telefonoCelular}
+                value={values.telefonoCelular}
                 onChange={handleChange("telefonoCelular")}
               />
             </form>
           </Grid>
+          <Grid item md={1} />
+          {values.tipoCliente === 1 ? vendedor() : comprador()}
         </Grid>
         <Grid container className={classes.boton}>
           <Grid item md={3} className={classes.input}>
