@@ -12,8 +12,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loggedIn: true,
-        dataLogged: action.data,
-        email: action.data.email,
+        dataLogged: action.resData,
+        email: action.resData.email,
       };
     default:
       return state;

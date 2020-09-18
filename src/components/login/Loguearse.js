@@ -11,6 +11,10 @@ import {
   Box,
   Typography,
   Container,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
@@ -67,6 +71,7 @@ function Loguearse({ history }) {
   const [values, setValues] = useState({
     email: "",
     password: "",
+    tipo: 0,
   });
 
   useEffect(() => {
@@ -79,6 +84,7 @@ function Loguearse({ history }) {
   const login = {
     email: values.email,
     password: values.password,
+    tipo: values.tipo,
   };
 
   const loguearse = async () => {
@@ -106,56 +112,81 @@ function Loguearse({ history }) {
           Sign in
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
-          <TextField
+          <FormControl
+            className={classes.form}
+            fullwidth
+            noValidate
             variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={values.email}
-            onChange={handleChange("email")}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            value={values.password}
-            autoComplete="current-password"
-            onChange={handleChange("password")}
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Recuerdame"
-          />
-          <Button
-            fullWidth
-            variant="contained"
-            className={classes.submit}
-            type="submit"
           >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                ¿Has olvidado tu contraseña?
-              </Link>
+            <InputLabel id="demo-simple-select-label">¿Que sos?</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={values.tipo}
+              onChange={handleChange("tipo")}
+              fullWidth
+              label="¿Que Sos?"
+            >
+              <MenuItem value={1}>Vendedor</MenuItem>
+              <MenuItem value={2}>Comprador</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl className={classes.form} fullWidth>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              value={values.email}
+              onChange={handleChange("email")}
+            />
+          </FormControl>
+          <FormControl fullWidth>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Contraseña"
+              type="password"
+              id="password"
+              value={values.password}
+              autoComplete="current-password"
+              onChange={handleChange("password")}
+            />
+          </FormControl>
+          <FormControl>
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Recuerdame"
+            />
+            <Button
+              fullWidth
+              variant="contained"
+              className={classes.submit}
+              type="submit"
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  ¿Has olvidado tu contraseña?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="#" variant="body2">
+                  {"¿No tienes un usuario? ¡Registrate!"}
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"¿No tienes un usuario? ¡Registrate!"}
-              </Link>
-            </Grid>
-          </Grid>
+          </FormControl>
         </form>
       </div>
       <Box mt={8}>

@@ -6,7 +6,13 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     height: 400,
     width: 800,
-    marginTop: 125,
+    marginTop: 300,
+  },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
   },
 }));
 
@@ -14,7 +20,7 @@ const Registrado = (props) => {
   const classes = useStyles();
   return (
     <div>
-      <Container>
+      <Container maxWidth="md" className={classes.container}>
         <Paper elevation={8} className={classes.paper}>
           holis
         </Paper>
