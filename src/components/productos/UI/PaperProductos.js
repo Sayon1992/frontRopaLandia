@@ -2,7 +2,6 @@ import { Card, CardMedia } from "@material-ui/core";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Carousel from "react-material-ui-carousel";
-//import Carousel from "react-material-ui-carousel";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -15,7 +14,7 @@ const PaperProductos = (props) => {
   const classes = useStyles();
   return (
     <Carousel>
-      {props.imagenes.map((imagen) => (
+      {/*props.imagenes.map((imagen) => (
         <Card className={classes.paper}>
           <CardMedia
             component="img"
@@ -26,7 +25,7 @@ const PaperProductos = (props) => {
             className={classes.maximo}
           />
         </Card>
-      ))}
+      ))*/}
     </Carousel>
   );
 };

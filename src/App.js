@@ -11,6 +11,7 @@ import VerTienda from "./components/tiendas/VerTienda";
 import Navbar from "./components/Navbars/Navbar";
 import Navbar2 from "./components/Navbars/Navbar2";
 import VerProducto from "./components/productos/VerProducto";
+import Registrado from "./components/login/Registrado";
 //import ClipLoader from 'react-spinners/ClipLoader';
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
         <Route exact path="/ProductoTest" component={AltaProducto} />
         <Route path="/VerTienda" component={VerTienda} />
         <Route path="/VerProducto" component={VerProducto} />
+        <Route path="/Registrado" component={Registrado} />
       </LoginContext.Provider>
     </div>
   );

@@ -17,6 +17,7 @@ import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { ContextLogin } from "../../context/loginContext";
 import * as authActions from "../../store/actions/auth";
 import { useDispatch } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -46,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Registrarse() {
+function Registrarse(props) {
   const classes = useStyles();
 
   const { setNavbar } = ContextLogin();
@@ -177,8 +178,15 @@ export default function Registrarse() {
     event.preventDefault();
   };
 
-  const registarUsuario = async () => {
-    await dispatch(authActions.signUp(values));
+  const registrarse = async () => {
+    const urlRegistrado = values.nombreCompleto.replace(" ", "-");
+    if (values.tipoCliente === 1) {
+      await dispatch(authActions.signUpTienda(values));
+      props.history.push(`/Registrado?tienda=${urlRegistrado}`);
+    } else {
+      await dispatch(authActions.signUpUsuario(values));
+      props.history.push(`/Registrado?tienda=${urlRegistrado}`);
+    }
   };
 
   return (
@@ -367,7 +375,7 @@ export default function Registrarse() {
           <Grid item md={3} className={classes.input}>
             <Button
               className={classes.colorBoton}
-              onClick={registarUsuario}
+              onClick={registrarse}
               variant="contained"
               color="primary"
             >
@@ -379,3 +387,5 @@ export default function Registrarse() {
     </div>
   );
 }
+
+export default withRouter(Registrarse);

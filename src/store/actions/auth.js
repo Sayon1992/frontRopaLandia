@@ -20,10 +20,22 @@ export const login = (login) => {
   };
 };
 
-export const signUp = (data) => {
+export const signUpUsuario = (data) => {
   return async (dispatch, getState) => {
     try {
-      await ApiGeneral.post("registrarse", {
+      await ApiGeneral.post("registrarUsuario", {
+        data,
+      });
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  };
+};
+
+export const signUpTienda = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      await ApiGeneral.post("registrarTienda", {
         data,
       });
     } catch (e) {
