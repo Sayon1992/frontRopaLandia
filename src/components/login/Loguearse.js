@@ -94,7 +94,6 @@ function Loguearse({ history }) {
   async function handleSubmit(event) {
     event.preventDefault();
     await loguearse();
-    alert("logueado");
   }
 
   const handleChange = (prop) => (event) => {

@@ -1,4 +1,4 @@
-import { Container, makeStyles, Paper } from "@material-ui/core";
+import { Container, makeStyles, Paper, Typography } from "@material-ui/core";
 import React from "react";
 import { withRouter } from "react-router-dom";
 
@@ -14,6 +14,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     alignSelf: "center",
   },
+  titulo: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+  },
 }));
 
 const Registrado = (props) => {
@@ -22,7 +28,9 @@ const Registrado = (props) => {
     <div>
       <Container maxWidth="md" className={classes.container}>
         <Paper elevation={8} className={classes.paper}>
-          holis
+          <Typography className={classes.titulo}>
+            Usted ha sido registrado correctamente!
+          </Typography>
         </Paper>
       </Container>
     </div>

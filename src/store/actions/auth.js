@@ -10,10 +10,15 @@ export const login = (login) => {
         login,
       });
       const resData = await response.data;
-      dispatch({
-        type: LOGIN,
-        resData,
-      });
+      if (resData.status === 200) {
+        localStorage.setItem("token", resData.token);
+        dispatch({
+          type: LOGIN,
+          resData,
+        });
+      } else {
+        throw new Error(resData.mensaje);
+      }
     } catch (e) {
       throw new Error(e.message);
     }
