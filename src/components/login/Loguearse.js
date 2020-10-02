@@ -89,6 +89,7 @@ function Loguearse({ history }) {
 
   const loguearse = async () => {
     await dispatch(authActions.login(login));
+    history.push("/");
   };
 
   async function handleSubmit(event) {

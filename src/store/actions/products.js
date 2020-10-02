@@ -11,7 +11,12 @@ export const getProductosTienda = () => {};
 
 export const altaProducto = (values, picture) => {
   return async (dispatch, getState) => {
-    const response = await ApiGeneral.post("altaProducto", { values, picture });
+    const token = localStorage.getItem("token");
+    const response = await ApiGeneral(
+      token,
+      { values, picture },
+      "altaProducto"
+    );
     const resData = await response.data;
     dispatch({ type: ALTA_PRODUCTO, productos: resData });
   };
@@ -19,7 +24,8 @@ export const altaProducto = (values, picture) => {
 
 export const getProducto = (id, tienda) => {
   return async (dispatch, getState) => {
-    const response = await ApiGeneral.post("getProducto", { id, tienda });
+    const token = localStorage.getItem("token");
+    const response = await ApiGeneral(token, { id, tienda }, "getProducto");
     const resData = await response.data;
     dispatch({ type: VER_PRODUCTO, producto: resData });
   };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, Container } from "@material-ui/core";
 import CardProducto from "./productos/CardProducto";
@@ -8,6 +8,8 @@ import { withRouter } from "react-router-dom";
 import Tiendas from "./tiendas/Tiendas";
 import tiendasJson from "./../jsonPruebas/tiendas.json";
 import productosTendencia from "../jsonPruebas/productosTendencia.json";
+import * as authActions from "../store/actions/auth";
+import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,7 +40,17 @@ function PaginaPrincipal({ history }) {
 
   const tiendas = tiendasJson;
 
+  const dispatch = useDispatch();
+
   const productosMuestra = productosTendencia;
+
+  const checkToken = async () => {
+    await dispatch(authActions.checkToken());
+  };
+
+  useEffect(() => {
+    checkToken();
+  }, []);
 
   // useEffect(()=>{
   //     axios.get('dummy').then(result =>{

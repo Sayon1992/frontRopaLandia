@@ -6,9 +6,7 @@ export const SIGN_UP = "SIGN_UP";
 export const login = (login) => {
   return async (dispatch, getState) => {
     try {
-      const response = await ApiGeneral.post("loguearse", {
-        login,
-      });
+      const response = await ApiGeneral("", login, "loguearse");
       const resData = await response.data;
       if (resData.status === 200) {
         localStorage.setItem("token", resData.token);
@@ -28,9 +26,7 @@ export const login = (login) => {
 export const signUpUsuario = (data) => {
   return async (dispatch, getState) => {
     try {
-      await ApiGeneral.post("registrarUsuario", {
-        data,
-      });
+      await ApiGeneral("", data, "registrarUsuario");
     } catch (e) {
       throw new Error(e.message);
     }
@@ -40,11 +36,20 @@ export const signUpUsuario = (data) => {
 export const signUpTienda = (data) => {
   return async (dispatch, getState) => {
     try {
-      await ApiGeneral.post("registrarTienda", {
-        data,
-      });
+      await ApiGeneral("", data, "registrarTienda");
     } catch (e) {
       throw new Error(e.message);
     }
+  };
+};
+
+export const checkToken = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      const response = await ApiGeneral("", data, "checkToken");
+      const resData = await response.data;
+      if (resData.validToken === true) {
+      }
+    } catch (e) {}
   };
 };
