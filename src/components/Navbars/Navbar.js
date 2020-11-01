@@ -16,23 +16,21 @@ import { withRouter } from "react-router";
 import { ContextLogin } from "../../context/loginContext";
 import { makeStyles, fade } from "@material-ui/core/styles";
 
+import icon from "../../assets/wireless-edge.svg";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#f96d80",
     color: "black",
     boxShadow: "none",
     display: "flex",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
     zIndex: 1,
   },
   buttonColor: {
     color: "#ebebeb",
   },
   menu: {
-    position: "absolute",
-    left: "122em",
+    marginLeft: "auto",
   },
   inputRoot: {
     color: "black",
@@ -56,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    marginLeft: "30%",
     width: "40em",
     [theme.breakpoints.up("sm")]: {
       width: "auto",
@@ -73,6 +70,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     color: "black",
     zIndex: 1,
+  },
+  appbar: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 }));
 
@@ -118,18 +120,21 @@ function Navbar({ history }) {
         <ElevationScroll>
           <AppBar className={classes.root}>
             <Toolbar>
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
+              <img src={icon} alt="React Logo" />
+              <div className={classes.appbar}>
+                <div className={classes.search}>
+                  <div className={classes.searchIcon}>
+                    <SearchIcon />
+                  </div>
+                  <InputBase
+                    placeholder="Search…"
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput,
+                    }}
+                    inputProps={{ "aria-label": "search" }}
+                  />
                 </div>
-                <InputBase
-                  placeholder="Search…"
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                  inputProps={{ "aria-label": "search" }}
-                />
               </div>
               <div className={classes.menu}>
                 <Tooltip title="Ir al carrito">

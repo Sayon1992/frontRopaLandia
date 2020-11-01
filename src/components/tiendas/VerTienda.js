@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import CompDrawer from "../productos/CompDrawer";
 import articulosTienda from "../../jsonPruebas/articulos.json";
 import CardProducto from "../productos/CardProducto";
-import { Grid } from "@material-ui/core";
+import { Grid, useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -15,9 +15,14 @@ const useStyles = makeStyles((theme) => ({
   items: {
     marginTop: 10,
   },
+  containerTiendaMobile: {
+    flex: 1,
+    marginTop: 125,
+  },
 }));
 
 const VerTienda = () => {
+  const media = useMediaQuery('(max-width:425px)');
   const classes = useStyles();
   const [articulos, setArticulos] = useState([]);
   const [cardArticulo, setCardArticulo] = useState([]);
@@ -46,15 +51,14 @@ const VerTienda = () => {
 
   return (
     <div>
-      <CompDrawer articulos={articulos} limitarArticulos={limitarArticulos} />
-      {/* eslint-disable-next-line}*/}
-      <Grid container className={classes.containerTienda}>
+      {media ? <>
+        <Grid container className={classes.containerTiendaMobile}>
         {cardArticulo.map((items) => {
           return (
             <React.Fragment key={items[0].id}>
               {items.map((item) => {
                 return (
-                  <Grid key={item.id} item md={3} className={classes.items}>
+                  <Grid key={item.id} item xs={6} sm={4} md={3} className={classes.items}>
                     <CardProducto
                       nombre={item.id}
                       key={item.id}
@@ -68,6 +72,29 @@ const VerTienda = () => {
           );
         })}
       </Grid>
+      </> : <> <CompDrawer articulos={articulos} limitarArticulos={limitarArticulos} />
+      {/* eslint-disable-next-line}*/}
+      <Grid container className={classes.containerTienda}>
+        {cardArticulo.map((items) => {
+          return (
+            <React.Fragment key={items[0].id}>
+              {items.map((item) => {
+                return (
+                  <Grid key={item.id} item xs={6} sm={4} md={3} className={classes.items}>
+                    <CardProducto
+                      nombre={item.id}
+                      key={item.id}
+                      precio={item.precio}
+                      imagen={item.imagen}
+                    />
+                  </Grid>
+                );
+              })}
+            </React.Fragment>
+          );
+        })}
+      </Grid> </>}
+      
     </div>
   );
 };

@@ -9,7 +9,7 @@ import Tiendas from "./tiendas/Tiendas";
 import tiendasJson from "./../jsonPruebas/tiendas.json";
 import productosTendencia from "../jsonPruebas/productosTendencia.json";
 import * as authActions from "../store/actions/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function PaginaPrincipal({ history }) {
+function PaginaPrincipal() {
   const classes = useStyles();
 
   const tiendas = tiendasJson;
@@ -50,6 +50,7 @@ function PaginaPrincipal({ history }) {
 
   useEffect(() => {
     checkToken();
+    // eslint-disable-next-line
   }, []);
 
   // useEffect(()=>{
