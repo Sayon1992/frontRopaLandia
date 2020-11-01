@@ -15,10 +15,13 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "center",
   },
   titulo: {
-    flex: 1,
+    display: "grid",
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
+    fontFamily: "Roboto Condensed",
+    fontSize: 40,
+    flex: 1,
   },
 }));
 

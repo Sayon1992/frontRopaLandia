@@ -9,10 +9,14 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { withRouter } from "react-router-dom";
+import ColorPallette from "./UI/ColorPallette";
 
 const useStyles = makeStyles((theme) => ({
   precio: {
-    fontWeight: 20,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: 25,
   },
   imagen: {
     maxWidth: 250,
@@ -37,9 +41,25 @@ const useStyles = makeStyles((theme) => ({
       transitionDuration: 300,
     },
   },
+  nombreProducto: {
+    justifyContent: "center",
+    alignItems: "center",
+    display: "flex",
+    fontSize: 26,
+    fontFamily: "Sansita Swashed",
+  },
+  content: {
+    maxHeight: 100,
+  },
+  colorPallette: {
+    position: "absolute",
+    flexDirection: "column",
+  },
 }));
 
 function CardProducto(props) {
+  const colores = ["red", "blue", "green", "black"];
+
   const classes = useStyles();
 
   const irAProducto = async () => {
@@ -49,9 +69,9 @@ function CardProducto(props) {
   };
 
   return (
-    <div onClick={irAProducto}>
+    <div>
       <Card className={classes.imagen}>
-        <CardActionArea>
+        <CardActionArea onClick={irAProducto}>
           <CardMedia
             component="img"
             alt="Ropa"
@@ -60,12 +80,22 @@ function CardProducto(props) {
             title="Ropa"
             className={classes.maximo}
           />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
+          <CardContent className={classes.content}>
+            <div className={classes.colorPallette}>
+              {colores.map((color) => (
+                <ColorPallette color={color} />
+              ))}
+            </div>
+            <Typography
+              className={classes.nombreProducto}
+              gutterBottom
+              variant="h5"
+              component="h2"
+            >
               {props.nombre}
             </Typography>
             <Typography variant="h6" className={classes.precio}>
-              {props.precio}
+              ${props.precio}
             </Typography>
           </CardContent>
         </CardActionArea>

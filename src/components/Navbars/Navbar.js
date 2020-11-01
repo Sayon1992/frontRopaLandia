@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#ebebeb",
   },
   menu: {
+    position: "relative",
     marginLeft: "auto",
   },
   inputRoot: {
@@ -43,9 +44,6 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "40em",
-    [theme.breakpoints.up("md")]: {
-      width: "40em",
-    },
   },
   search: {
     position: "relative",
@@ -54,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
+    marginLeft: "20%",
     width: "40em",
     [theme.breakpoints.up("sm")]: {
       width: "auto",

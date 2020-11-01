@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, Container } from "@material-ui/core";
 import CardProducto from "./productos/CardProducto";
@@ -44,14 +44,13 @@ function PaginaPrincipal() {
 
   const productosMuestra = productosTendencia;
 
-  const checkToken = async () => {
+  const checkToken = useCallback(async () => {
     await dispatch(authActions.checkToken());
-  };
+  }, [dispatch]);
 
   useEffect(() => {
     checkToken();
-    // eslint-disable-next-line
-  }, []);
+  }, [checkToken]);
 
   // useEffect(()=>{
   //     axios.get('dummy').then(result =>{
