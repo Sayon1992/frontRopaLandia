@@ -16,7 +16,7 @@ import { withRouter } from "react-router";
 import { ContextLogin } from "../../context/loginContext";
 import { makeStyles, fade } from "@material-ui/core/styles";
 
-import icon from "../../assets/wireless-edge.svg";
+// import icon from "../../assets/wireless-edge.svg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -119,7 +119,7 @@ function Navbar({ history }) {
         <ElevationScroll>
           <AppBar className={classes.root}>
             <Toolbar>
-              <img src={icon} alt="React Logo" />
+              {/* <img src={icon} alt="React Logo" /> */}
               <div className={classes.appbar}>
                 <div className={classes.search}>
                   <div className={classes.searchIcon}>

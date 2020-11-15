@@ -11,9 +11,6 @@ import {
   Box,
   Typography,
   Container,
-  Select,
-  MenuItem,
-  InputLabel,
   FormControl,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -84,7 +81,6 @@ function Loguearse({ history }) {
   const login = {
     email: values.email,
     password: values.password,
-    tipo: values.tipo,
   };
 
   const loguearse = async () => {
@@ -112,25 +108,6 @@ function Loguearse({ history }) {
           Sign in
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
-          <FormControl
-            className={classes.form}
-            fullwidth
-            noValidate
-            variant="outlined"
-          >
-            <InputLabel id="demo-simple-select-label">¿Que sos?</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={values.tipo}
-              onChange={handleChange("tipo")}
-              fullWidth
-              label="¿Que Sos?"
-            >
-              <MenuItem value={1}>Vendedor</MenuItem>
-              <MenuItem value={2}>Comprador</MenuItem>
-            </Select>
-          </FormControl>
           <FormControl className={classes.form} fullWidth>
             <TextField
               variant="outlined"

@@ -6,7 +6,7 @@ export const SIGN_UP = "SIGN_UP";
 export const login = (login) => {
   return async (dispatch, getState) => {
     try {
-      const response = await ApiGeneral("", login, "loguearse");
+      const response = await ApiGeneral("", login, "user/login");
       const resData = await response.data;
       if (resData.status === 200) {
         localStorage.setItem("token", resData.token);
@@ -15,10 +15,10 @@ export const login = (login) => {
           resData,
         });
       } else {
-        throw new Error(resData.mensaje);
+        console.log(resData);
       }
     } catch (e) {
-      throw new Error(e.message);
+      console.log(e.message);
     }
   };
 };
